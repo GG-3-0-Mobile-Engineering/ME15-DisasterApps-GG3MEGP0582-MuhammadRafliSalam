@@ -17,8 +17,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:cardCornerRadius="8dp"
-        app:cardElevation="12dp"
+        app:cardElevation="10dp"
         app:cardUseCompatPadding="true"
+        android:backgroundTint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -32,10 +33,112 @@
             app:queryHint="@string/searching_hint"
             app:searchIcon="@drawable/ic_search"
             app:iconifiedByDefault="true"
-            app:queryBackground="@android:color/transparent"
             android:focusable="true" />
 
     </com.google.android.material.card.MaterialCardView>
+
+
+    <HorizontalScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scrollbars="none"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/materialCardView">
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chip_group_filter"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            app:chipSpacingHorizontal="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:singleLine="true"
+            app:singleSelection="true">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip1"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_medium"
+                android:text="@string/chip_disaster1"
+                android:textSize="14sp"
+                app:checkedIconVisible="false"
+                app:chipBackgroundColor="@color/white"
+                app:chipIcon="@drawable/ic_chip"
+                app:chipIconVisible="true" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip2"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_medium"
+                android:text="@string/chip_disaster2"
+                android:textSize="14sp"
+                app:checkedIconVisible="false"
+                app:chipBackgroundColor="@color/white"
+                app:chipIcon="@drawable/ic_chip"
+                app:chipIconVisible="true" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip3"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_medium"
+                android:text="@string/chip_disaster3"
+                android:textSize="14sp"
+                app:checkedIconVisible="false"
+                app:chipBackgroundColor="@color/white"
+                app:chipIcon="@drawable/ic_chip"
+                app:chipIconVisible="true" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip4"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_medium"
+                android:text="@string/chip_disaster4"
+                android:textSize="14sp"
+                app:checkedIconVisible="false"
+                app:chipBackgroundColor="@color/white"
+                app:chipIcon="@drawable/ic_chip"
+                app:chipIconVisible="true" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip5"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_medium"
+                android:text="@string/chip_disaster5"
+                android:textSize="14sp"
+                app:checkedIconVisible="false"
+                app:chipBackgroundColor="@color/white"
+                app:chipIcon="@drawable/ic_chip"
+                app:chipIconVisible="true" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip6"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_medium"
+                android:text="@string/chip_disaster6"
+                android:textSize="14sp"
+                app:checkedIconVisible="false"
+                app:chipBackgroundColor="@color/white"
+                app:chipIcon="@drawable/ic_chip"
+                app:chipIconVisible="true" />
+        </com.google.android.material.chip.ChipGroup>
+
+    </HorizontalScrollView>
+
 
     <Button
         android:id="@+id/btnShowDisasters"

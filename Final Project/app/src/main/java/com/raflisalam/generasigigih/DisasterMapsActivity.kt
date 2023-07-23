@@ -2,8 +2,6 @@ package com.raflisalam.generasigigih
 
 import android.content.res.Resources
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
@@ -18,7 +16,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.android.material.internal.ViewUtils.hideKeyboard
+import com.google.android.material.chip.Chip
 import com.raflisalam.generasigigih.data.DisasterArea
 import com.raflisalam.generasigigih.databinding.ActivityDisasterMapsBinding
 import com.raflisalam.generasigigih.utils.LocationUtils
@@ -33,8 +31,15 @@ class DisasterMapsActivity : AppCompatActivity() {
     private lateinit var locationUtils: LocationUtils
     private lateinit var utils: Utils
 
+    private var regionCode: String = ""
+    private var disasterType: String = ""
+    private var timePeriod: Number = 0
+
     private val callback =  OnMapReadyCallback { googleMap ->
         setupMaps(googleMap)
+
+        Log.d("REGION SEBELUM DI RETURN", regionCode)
+        Log.d("DISASTER_TYPE", disasterType)
         reportsViewModel.getDisasterCoordinates().observe(this) { reports ->
             googleMap.clear()
             reports?.forEach { data ->
@@ -72,18 +77,43 @@ class DisasterMapsActivity : AppCompatActivity() {
         setupButton()
         requestLocation()
         filterDisastersBasedOnArea()
+        filterDisastersBasedOnType()
     }
 
     private fun requestLocation() {
         locationUtils = LocationUtils(this)
         locationUtils.requestLocationUpdates(object: LocationUtils.LocationCallback {
             override fun onLocationReceived(regionCode: String) {
-                reportsViewModel.fetchDisastersBasendOnArea(regionCode,604800)
+                this@DisasterMapsActivity.regionCode = regionCode
+                reportsViewModel.fetchDisastersBasendOnArea(regionCode, 604800)
             }
         })
     }
 
-    private fun filterDisastersBasedOnArea() {
+    private fun filterDisastersBasedOnType(): String {
+        binding.chipGroupFilter.setOnCheckedChangeListener { group, checkedId ->
+            val chip: Chip? = group.findViewById(checkedId)
+            val selectedChipDisasters = convertToEnglish(chip?.text.toString())
+            disasterType = selectedChipDisasters
+            Log.d("REGION_CODE", regionCode)
+            reportsViewModel.fetchDisastersBasendOnType(regionCode, disasterType, 604800)
+        }
+        return disasterType
+    }
+
+    private fun convertToEnglish(chip: String): String {
+        return when (chip) {
+            "Banjir" -> "flood"
+            "Badai" -> "wind"
+            "Gempa" -> "earthquake"
+            "Kabut" -> "haze"
+            "Kebakaran" -> "fire"
+            "Gunung Berapi" -> "volcano"
+            else -> "Invalid chip"
+        }
+    }
+
+    private fun filterDisastersBasedOnArea(): String {
         binding.apply {
             searching.setOnClickListener {
                 searching.isIconified = false
@@ -91,7 +121,9 @@ class DisasterMapsActivity : AppCompatActivity() {
             searching.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(regionName: String?): Boolean {
                     if (!regionName.isNullOrEmpty()) {
-                        reportsViewModel.fetchDisastersBasendOnArea(convertToRegionCode(regionName), 604800)
+                        val convertRegionName =  convertToRegionCode(regionName)
+                        regionCode = convertRegionName
+                        reportsViewModel.fetchDisastersBasendOnArea(convertRegionName, 604800)
                     }
                     searching.setQuery("", false)
                     searching.clearFocus()
@@ -104,6 +136,7 @@ class DisasterMapsActivity : AppCompatActivity() {
 
             })
         }
+        return regionCode
     }
 
     private fun setupViewModel() {

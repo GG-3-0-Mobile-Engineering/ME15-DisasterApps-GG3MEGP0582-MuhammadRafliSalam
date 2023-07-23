@@ -6,4 +6,10 @@
     <string name="p_lorem_ipsum">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</string>
     <string name="searching_hint">Cari Area Bencana</string>
     <string name="text_btn_show_disaster">Lihat Informasi Bencana</string>
+    <string name="chip_disaster1">Banjir</string>
+    <string name="chip_disaster2">Badai</string>
+    <string name="chip_disaster3">Gempa</string>
+    <string name="chip_disaster4">Kabut</string>
+    <string name="chip_disaster5">Kebakaran</string>
+    <string name="chip_disaster6">Gunung Berapi</string>
 </resources>

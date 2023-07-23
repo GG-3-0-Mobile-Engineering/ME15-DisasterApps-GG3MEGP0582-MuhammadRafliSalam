@@ -55,6 +55,27 @@ class ReportsViewModel: ViewModel() {
         })
     }
 
+    fun fetchDisastersBasendOnType(regionCode: String, disaster: String, timePeriod: Number) {
+        ApiClient.instance.getDisastersBasedOnType(regionCode, disaster, timePeriod).enqueue(object : Callback<DisasterResponse> {
+            override fun onResponse(
+                call: Call<DisasterResponse>,
+                response: Response<DisasterResponse>
+            ) {
+                if (response.isSuccessful) {
+                    val geometries = response.body()?.result?.objects?.output?.geometries
+                    disasterReports.postValue(geometries)
+                    dataDisasters.value = geometries?.map { it.disasterReports } ?:  emptyList()
+                }
+            }
+
+            override fun onFailure(call: Call<DisasterResponse>, t: Throwable) {
+                t.message?.let { Log.d("Fail Load!", it) }
+            }
+
+        })
+    }
+
+
     fun getDisasterCoordinates(): LiveData<List<Geometry>?> {
         return disasterReports
     }

@@ -18,4 +18,11 @@ interface ApiServices {
         @Query("timeperiod") number: Number
     ): Call<DisasterResponse>
 
+    @GET("reports")
+    fun getDisastersBasedOnType(
+        @Query("admin") regionCode: String,
+        @Query("disaster") disaster: String,
+        @Query("timeperiod") number: Number
+    ): Call<DisasterResponse>
+
 }
