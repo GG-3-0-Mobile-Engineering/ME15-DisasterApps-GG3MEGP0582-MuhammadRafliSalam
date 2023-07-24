@@ -19,8 +19,8 @@
         app:cardCornerRadius="8dp"
         app:cardElevation="10dp"
         app:cardUseCompatPadding="true"
-        android:backgroundTint="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:cardBackgroundColor="@color/card_search_background"
+        app:layout_constraintEnd_toStartOf="@id/btnSetting"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -37,6 +37,19 @@
 
     </com.google.android.material.card.MaterialCardView>
 
+    <ImageButton
+        android:id="@+id/btnSetting"
+        android:layout_width="47dp"
+        android:layout_height="47dp"
+        android:src="@drawable/ic_settings"
+        android:clickable="true"
+        app:layout_constraintTop_toTopOf="@id/materialCardView"
+        app:layout_constraintBottom_toBottomOf="@id/materialCardView"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/bg_settings"
+        android:focusable="true"
+        android:layout_marginEnd="16dp"
+        android:importantForAccessibility="no" />
 
     <HorizontalScrollView
         android:layout_width="wrap_content"
@@ -66,8 +79,9 @@
                 android:fontFamily="@font/poppins_medium"
                 android:text="@string/chip_disaster1"
                 android:textSize="14sp"
+                android:textColor="@color/chip_text"
                 app:checkedIconVisible="false"
-                app:chipBackgroundColor="@color/white"
+                app:chipBackgroundColor="@color/chip_color_background"
                 app:chipIcon="@drawable/ic_chip"
                 app:chipIconVisible="true" />
 
@@ -80,7 +94,8 @@
                 android:text="@string/chip_disaster2"
                 android:textSize="14sp"
                 app:checkedIconVisible="false"
-                app:chipBackgroundColor="@color/white"
+                android:textColor="@color/chip_text"
+                app:chipBackgroundColor="@color/chip_color_background"
                 app:chipIcon="@drawable/ic_chip"
                 app:chipIconVisible="true" />
 
@@ -93,7 +108,8 @@
                 android:text="@string/chip_disaster3"
                 android:textSize="14sp"
                 app:checkedIconVisible="false"
-                app:chipBackgroundColor="@color/white"
+                android:textColor="@color/chip_text"
+                app:chipBackgroundColor="@color/chip_color_background"
                 app:chipIcon="@drawable/ic_chip"
                 app:chipIconVisible="true" />
 
@@ -106,7 +122,8 @@
                 android:text="@string/chip_disaster4"
                 android:textSize="14sp"
                 app:checkedIconVisible="false"
-                app:chipBackgroundColor="@color/white"
+                android:textColor="@color/chip_text"
+                app:chipBackgroundColor="@color/chip_color_background"
                 app:chipIcon="@drawable/ic_chip"
                 app:chipIconVisible="true" />
 
@@ -119,7 +136,8 @@
                 android:text="@string/chip_disaster5"
                 android:textSize="14sp"
                 app:checkedIconVisible="false"
-                app:chipBackgroundColor="@color/white"
+                android:textColor="@color/chip_text"
+                app:chipBackgroundColor="@color/chip_color_background"
                 app:chipIcon="@drawable/ic_chip"
                 app:chipIconVisible="true" />
 
@@ -132,7 +150,8 @@
                 android:text="@string/chip_disaster6"
                 android:textSize="14sp"
                 app:checkedIconVisible="false"
-                app:chipBackgroundColor="@color/white"
+                android:textColor="@color/chip_text"
+                app:chipBackgroundColor="@color/chip_color_background"
                 app:chipIcon="@drawable/ic_chip"
                 app:chipIconVisible="true" />
         </com.google.android.material.chip.ChipGroup>
@@ -149,6 +168,8 @@
         android:fontFamily="@font/poppins_bold"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="24dp"
+        android:backgroundTint="@color/primary"
+        android:textColor="@color/button_text_color"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
 

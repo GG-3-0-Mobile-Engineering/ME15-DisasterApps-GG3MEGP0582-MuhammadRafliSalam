@@ -1,5 +1,6 @@
 package com.raflisalam.generasigigih
 
+import android.content.Intent
 import android.content.res.Resources
 import android.os.Bundle
 import android.util.Log
@@ -19,6 +20,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.chip.Chip
 import com.raflisalam.generasigigih.data.DisasterArea
 import com.raflisalam.generasigigih.databinding.ActivityDisasterMapsBinding
+import com.raflisalam.generasigigih.ui.SettingsActivity
 import com.raflisalam.generasigigih.utils.LocationUtils
 import com.raflisalam.generasigigih.utils.Utils
 
@@ -161,6 +163,10 @@ class DisasterMapsActivity : AppCompatActivity() {
     private fun setupButton() {
         binding.btnShowDisasters.setOnClickListener {
             bottomSheetDialog.show()
+        }
+
+        binding.btnSetting.setOnClickListener {
+            startActivity(Intent(this, SettingsActivity::class.java))
         }
     }
 

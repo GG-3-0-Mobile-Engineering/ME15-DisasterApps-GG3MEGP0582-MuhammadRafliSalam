@@ -17,7 +17,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FinalProjectGigih"
         tools:targetApi="31">
-
+        <activity
+            android:name=".ui.SettingsActivity"
+            android:exported="false" />
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
 
@@ -31,7 +33,7 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCxl9HD-z0QzR7C8sBQ2Hzb0-NkD0B-zjk"/>
+            android:value="AIzaSyCxl9HD-z0QzR7C8sBQ2Hzb0-NkD0B-zjk" />
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

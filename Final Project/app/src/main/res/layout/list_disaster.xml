@@ -4,12 +4,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:backgroundTint="#fff"
+    app:cardBackgroundColor="@color/card_item_background"
     app:cardCornerRadius="8dp"
     android:layout_marginStart="16dp"
     android:layout_marginEnd="16dp"
     app:cardUseCompatPadding="true"
-    android:elevation="12dp">
+    android:elevation="4dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -37,6 +37,7 @@
             android:text="@string/h1_lorem_ipsum"
             android:layout_marginTop="5dp"
             android:layout_marginStart="8dp"
+            android:textColor="@color/primary_text"
             app:layout_constraintTop_toTopOf="@id/image"
             app:layout_constraintStart_toEndOf="@id/image"/>
 
@@ -47,7 +48,7 @@
             android:fontFamily="@font/poppins_medium"
             android:maxLines="3"
             android:text="@string/p_lorem_ipsum"
-            android:textColor="#403E3E"
+            android:textColor="@color/primary_text"
             android:textSize="11sp"
             app:layout_constraintStart_toStartOf="@id/title"
             app:layout_constraintTop_toBottomOf="@id/title" />
@@ -57,7 +58,7 @@
             android:layout_width="189dp"
             android:layout_height="wrap_content"
             android:textSize="10sp"
-            android:textColor="#878787"
+            android:textColor="@color/secondary_text"
             android:text="@string/h1_lorem_ipsum"
             app:layout_constraintTop_toBottomOf="@id/text"
             app:layout_constraintStart_toStartOf="@id/text"/>
