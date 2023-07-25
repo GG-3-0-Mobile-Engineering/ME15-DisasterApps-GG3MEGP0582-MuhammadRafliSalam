@@ -1,10 +1,16 @@
 package com.raflisalam.generasigigih
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.res.Resources
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
+import android.view.View
+import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -24,62 +30,86 @@ import com.raflisalam.generasigigih.ui.SettingsActivity
 import com.raflisalam.generasigigih.utils.LocationUtils
 import com.raflisalam.generasigigih.utils.Utils
 
-class DisasterMapsActivity : AppCompatActivity() {
+class DisasterMapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var binding: ActivityDisasterMapsBinding
     private lateinit var reportsViewModel: ReportsViewModel
     private lateinit var adapterDisaster: DisasterAdapter
     private lateinit var bottomSheetDialog: BottomSheetDialog
     private lateinit var locationUtils: LocationUtils
+    private lateinit var sharedPref: SharedPreferences
+    private lateinit var mapFragment: SupportMapFragment
     private lateinit var utils: Utils
+    private val handler = Handler()
 
     private var regionCode: String = ""
     private var disasterType: String = ""
-    private var timePeriod: Number = 0
-
-    private val callback =  OnMapReadyCallback { googleMap ->
-        setupMaps(googleMap)
-
-        Log.d("REGION SEBELUM DI RETURN", regionCode)
-        Log.d("DISASTER_TYPE", disasterType)
-        reportsViewModel.getDisasterCoordinates().observe(this) { reports ->
-            googleMap.clear()
-            reports?.forEach { data ->
-                if (data.type == "Point") {
-                    val coordinate = data.coordinates
-                    if (coordinate.size >= 2) {
-                        val latitude = coordinate[1]
-                        val longitude = coordinate[0]
-                        val markers = LatLng(latitude, longitude)
-                        googleMap.addMarker(
-                            MarkerOptions()
-                                .position(markers)
-                                .title(data.disasterReports.disasterType)
-                                .snippet("Bencana terjadi pada ${data.disasterReports.createdAt}")
-                        )
-                        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(markers, 10f))
-                    }
-                } else if (data.type == "") {
-                    val defaultPositionMarkers = LatLng(-2.2237827, 95.9284679)
-                    googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(defaultPositionMarkers, 8f))
-                }
-            }
-        }
-    }
+    private var timePeriod: Number = 86400
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDisasterMapsBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
-        mapFragment.getMapAsync(callback)
+        mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
+        mapFragment.getMapAsync(this)
+
         utils = Utils()
 
+        setLoadMaps()
         setupViewModel()
+        setupTheme()
         setupButton()
         requestLocation()
         filterDisastersBasedOnArea()
         filterDisastersBasedOnType()
+
+    }
+
+    private fun setLoadMaps() {
+        binding.apply {
+            //Proses Load Maps
+            loadingProgress.visibility = View.VISIBLE
+            mapFragment.view?.visibility = View.INVISIBLE
+            materialCardView.visibility = View.INVISIBLE
+            materialCardView2.visibility = View.INVISIBLE
+            chipGroupFilter.visibility = View.INVISIBLE
+            btnShowDisasters.visibility = View.INVISIBLE
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        setPeriodTimeDisasters()
+    }
+
+    private fun setPeriodTimeDisasters() {
+        val periodDisasters = resources.getStringArray(R.array.daftar_periode_bencana)
+        val arrayAdapter = ArrayAdapter(this, R.layout.dropdown_item, periodDisasters)
+        binding.apply {
+            autoCompleteTextView.setAdapter(arrayAdapter)
+            autoCompleteTextView.setOnItemClickListener { adapterView, view, position, id ->
+                val selectedPeriod = adapterView.getItemAtPosition(position).toString()
+                Log.d("PERIOD_TERBARU", selectedPeriod)
+                timePeriod = getDropdownPeriod(selectedPeriod)
+                Log.d("PERIOD 2", timePeriod.toString())
+                reportsViewModel.fetchDisastersBasendOnType(regionCode, disasterType, timePeriod)
+            }
+        }
+    }
+
+    private fun getDropdownPeriod(selectedPeriod: String): Number {
+        return when (selectedPeriod) {
+            "1 Hari" -> 86400
+            "3 Hari" -> 259200
+            "7 Hari" -> 604800
+            else -> 0
+        }
+    }
+
+    private fun setupTheme() {
+        sharedPref = getSharedPreferences(KEY_THEME, Context.MODE_PRIVATE)
+        val themeMode = sharedPref.getInt(KEY_THEME, AppCompatDelegate.MODE_NIGHT_NO)
+        AppCompatDelegate.setDefaultNightMode(themeMode)
     }
 
     private fun requestLocation() {
@@ -87,7 +117,7 @@ class DisasterMapsActivity : AppCompatActivity() {
         locationUtils.requestLocationUpdates(object: LocationUtils.LocationCallback {
             override fun onLocationReceived(regionCode: String) {
                 this@DisasterMapsActivity.regionCode = regionCode
-                reportsViewModel.fetchDisastersBasendOnArea(regionCode, 604800)
+                reportsViewModel.fetchDisastersBasendOnArea(regionCode, timePeriod)
             }
         })
     }
@@ -97,8 +127,7 @@ class DisasterMapsActivity : AppCompatActivity() {
             val chip: Chip? = group.findViewById(checkedId)
             val selectedChipDisasters = convertToEnglish(chip?.text.toString())
             disasterType = selectedChipDisasters
-            Log.d("REGION_CODE", regionCode)
-            reportsViewModel.fetchDisastersBasendOnType(regionCode, disasterType, 604800)
+            reportsViewModel.fetchDisastersBasendOnType(regionCode, disasterType, timePeriod)
         }
         return disasterType
     }
@@ -125,7 +154,7 @@ class DisasterMapsActivity : AppCompatActivity() {
                     if (!regionName.isNullOrEmpty()) {
                         val convertRegionName =  convertToRegionCode(regionName)
                         regionCode = convertRegionName
-                        reportsViewModel.fetchDisastersBasendOnArea(convertRegionName, 604800)
+                        reportsViewModel.fetchDisastersBasendOnArea(convertRegionName, timePeriod)
                     }
                     searching.setQuery("", false)
                     searching.clearFocus()
@@ -168,6 +197,49 @@ class DisasterMapsActivity : AppCompatActivity() {
         binding.btnSetting.setOnClickListener {
             startActivity(Intent(this, SettingsActivity::class.java))
         }
+    }
+
+    override fun onMapReady(googleMap: GoogleMap) {
+        setupMaps(googleMap)
+        binding.apply {
+            handler.postDelayed({
+                loadingProgress.visibility = View.INVISIBLE
+                mapFragment.view?.visibility = View.VISIBLE
+                materialCardView.visibility = View.VISIBLE
+                materialCardView2.visibility = View.VISIBLE
+                chipGroupFilter.visibility = View.VISIBLE
+                btnShowDisasters.visibility = View.VISIBLE
+            }, 2000)
+        }
+
+        reportsViewModel.getDisasterCoordinates().observe(this) { reports ->
+            googleMap.clear()
+            reports?.forEach { data ->
+                if (data.type == "Point") {
+                    val coordinate = data.coordinates
+                    if (coordinate.size >= 2) {
+                        val latitude = coordinate[1]
+                        val longitude = coordinate[0]
+                        val markers = LatLng(latitude, longitude)
+                        googleMap.addMarker(
+                            MarkerOptions()
+                                .position(markers)
+                                .title(data.disasterReports.disasterType)
+                                .snippet("Bencana terjadi pada ${data.disasterReports.createdAt}")
+                        )
+                        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(markers, 14f))
+                    }
+                } else if (data.type == "") {
+                    val defaultPositionMarkers = LatLng(-2.2237827, 95.9284679)
+                    googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(defaultPositionMarkers, 14f))
+                }
+            }
+        }
+    }
+
+    override fun onDestroy() {
+        handler.removeCallbacksAndMessages(null)
+        super.onDestroy()
     }
 
     private fun setupMaps(googleMap: GoogleMap) {
@@ -231,5 +303,6 @@ class DisasterMapsActivity : AppCompatActivity() {
 
     companion object {
         private const val TAG = "MapsActivity"
+        private const val KEY_THEME = "theme_mode"
     }
 }

@@ -12,6 +12,19 @@
         android:layout_height="match_parent"
         tools:context=".DisasterMapsActivity" />
 
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/loading_progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:trackThickness="5dp"
+        app:indicatorColor="@color/indicator_progress_color"
+        app:trackColor="@color/track_progress_color"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:indeterminate="true"/>
+    
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/materialCardView"
         android:layout_width="0dp"
@@ -20,7 +33,7 @@
         app:cardElevation="10dp"
         app:cardUseCompatPadding="true"
         app:cardBackgroundColor="@color/card_search_background"
-        app:layout_constraintEnd_toStartOf="@id/btnSetting"
+        app:layout_constraintEnd_toStartOf="@id/materialCardView2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -37,6 +50,48 @@
 
     </com.google.android.material.card.MaterialCardView>
 
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/materialCardView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="10dp"
+        android:layout_marginEnd="16dp"
+        app:cardBackgroundColor="@color/card_search_background"
+        app:layout_constraintBottom_toBottomOf="@+id/materialCardView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/dropdown_menu"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="46dp"
+            app:endIconTint="@color/dropdown_icon_color"
+            android:layout_marginBottom="3dp"
+            app:layout_constraintBottom_toBottomOf="@+id/materialCardView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <AutoCompleteTextView
+                android:id="@+id/autoCompleteTextView"
+                android:layout_width="match_parent"
+                android:layout_height="51dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/poppins_medium"
+                android:paddingTop="14dp"
+                android:paddingBottom="10dp"
+                android:text="1 Hari"
+                android:inputType="none"
+                android:textSize="12sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+
     <ImageButton
         android:id="@+id/btnSetting"
         android:layout_width="47dp"
@@ -47,6 +102,7 @@
         app:layout_constraintBottom_toBottomOf="@id/materialCardView"
         app:layout_constraintEnd_toEndOf="parent"
         android:background="@drawable/bg_settings"
+        android:visibility="gone"
         android:focusable="true"
         android:layout_marginEnd="16dp"
         android:importantForAccessibility="no" />

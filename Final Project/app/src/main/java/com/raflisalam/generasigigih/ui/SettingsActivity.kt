@@ -31,7 +31,7 @@ class SettingsActivity : AppCompatActivity() {
             setSupportActionBar(toolbar)
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
             supportActionBar?.setDisplayShowHomeEnabled(true)
-            supportActionBar?.title = "Settings"
+            supportActionBar?.title = getString(R.string.title_toolbar_settings)
             toolbar.setNavigationOnClickListener {
                 onBackPressed()
             }

@@ -16,4 +16,7 @@
     <color name="color_stroke_thumb">@color/primary</color>
     <color name="colorOnSurface">@color/primary</color>
     <color name="colorSecondary">#403E3E</color>
+    <color name="dropdown_icon_color">@color/primary</color>
+    <color name="indicator_progress_color">@color/primary</color>
+    <color name="track_progress_color">#878585</color>
 </resources>
