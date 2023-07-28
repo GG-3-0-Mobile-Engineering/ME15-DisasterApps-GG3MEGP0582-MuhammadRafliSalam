@@ -63,7 +63,7 @@ class LocationUtils(private val activity: FragmentActivity) {
     private fun getRegionCode(latitude: Double, longitude: Double) {
         val geocoder = Geocoder(activity, Locale.getDefault())
         try {
-            val address: List<Address> = geocoder.getFromLocation(-6.200229, 106.849211, 1)!!
+            val address: List<Address> = geocoder.getFromLocation(latitude, longitude, 1)!!
             for (region in address) {
                 val city = region.adminArea
                 regionCode = convertCityIntoRegionCode(city)

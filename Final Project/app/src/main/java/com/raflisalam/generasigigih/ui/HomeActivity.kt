@@ -30,8 +30,6 @@ import com.raflisalam.generasigigih.ReportsViewModel
 import com.raflisalam.generasigigih.databinding.ActivityHomeBinding
 import com.raflisalam.generasigigih.utils.LocationUtils
 import com.raflisalam.generasigigih.utils.NotificationUtils
-import com.raflisalam.generasigigih.utils.Utils
-
 
 class HomeActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -80,7 +78,6 @@ class HomeActivity : AppCompatActivity(), OnMapReadyCallback {
         locationUtils.requestLocationUpdates(object : LocationUtils.LocationCallback {
             override fun onLocationReceived(regionCode: String) {
                 this@HomeActivity.regionCode = regionCode
-                Log.d(TAG, regionCode)
                 reportsViewModel.fetchDisastersBasendOnType(regionCode, disasterType, timePeriod)
             }
         })
@@ -158,6 +155,7 @@ class HomeActivity : AppCompatActivity(), OnMapReadyCallback {
     companion object {
         private const val TAG = "HomeActivity"
         private const val KEY_THEME = "theme_mode"
+        private const val KEY_LOCATION = "coordinate_user"
     }
 
 }
