@@ -69,8 +69,8 @@ data class DisasterReports(
 data class ReportData(
     @SerializedName("report_type")
     val reportType: String,
-    @SerializedName("structureFailure")
-    val structureFailure: Int
+    @SerializedName("flood_depth")
+    val flood_depth: Int
 )
 
 data class Tags(

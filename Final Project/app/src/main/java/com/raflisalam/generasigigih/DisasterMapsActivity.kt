@@ -37,7 +37,6 @@ class DisasterMapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var adapterDisaster: DisasterAdapter
     private lateinit var bottomSheetDialog: BottomSheetDialog
     private lateinit var locationUtils: LocationUtils
-    private lateinit var sharedPref: SharedPreferences
     private lateinit var mapFragment: SupportMapFragment
     private lateinit var utils: Utils
     private val handler = Handler()
@@ -57,7 +56,6 @@ class DisasterMapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         setLoadMaps()
         setupViewModel()
-        setupTheme()
         setupButton()
         requestLocation()
         filterDisastersBasedOnArea()
@@ -104,12 +102,6 @@ class DisasterMapsActivity : AppCompatActivity(), OnMapReadyCallback {
             "7 Hari" -> 604800
             else -> 0
         }
-    }
-
-    private fun setupTheme() {
-        sharedPref = getSharedPreferences(KEY_THEME, Context.MODE_PRIVATE)
-        val themeMode = sharedPref.getInt(KEY_THEME, AppCompatDelegate.MODE_NIGHT_NO)
-        AppCompatDelegate.setDefaultNightMode(themeMode)
     }
 
     private fun requestLocation() {
@@ -194,8 +186,8 @@ class DisasterMapsActivity : AppCompatActivity(), OnMapReadyCallback {
             bottomSheetDialog.show()
         }
 
-        binding.btnSetting.setOnClickListener {
-            startActivity(Intent(this, SettingsActivity::class.java))
+        binding.btnBack.setOnClickListener {
+            onBackPressed()
         }
     }
 
@@ -303,6 +295,5 @@ class DisasterMapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     companion object {
         private const val TAG = "MapsActivity"
-        private const val KEY_THEME = "theme_mode"
     }
 }

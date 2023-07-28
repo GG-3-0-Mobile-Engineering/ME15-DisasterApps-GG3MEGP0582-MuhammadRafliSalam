@@ -4,12 +4,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    app:strokeColor="@color/card_item_background"
     app:cardBackgroundColor="@color/card_item_background"
     app:cardCornerRadius="8dp"
     android:layout_marginStart="16dp"
     android:layout_marginEnd="16dp"
     app:cardUseCompatPadding="true"
-    android:elevation="4dp">
+    android:elevation="8dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
