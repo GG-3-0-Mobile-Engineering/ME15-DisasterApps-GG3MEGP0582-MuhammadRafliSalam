@@ -87,9 +87,7 @@ class DisasterMapsActivity : AppCompatActivity(), OnMapReadyCallback {
             autoCompleteTextView.setAdapter(arrayAdapter)
             autoCompleteTextView.setOnItemClickListener { adapterView, view, position, id ->
                 val selectedPeriod = adapterView.getItemAtPosition(position).toString()
-                Log.d("PERIOD_TERBARU", selectedPeriod)
                 timePeriod = getDropdownPeriod(selectedPeriod)
-                Log.d("PERIOD 2", timePeriod.toString())
                 reportsViewModel.fetchDisastersBasendOnType(regionCode, disasterType, timePeriod)
             }
         }

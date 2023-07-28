@@ -43,15 +43,12 @@ class LocationUtils(private val activity: FragmentActivity) {
 
     private fun getCurrentLocation() {
         locationManager = activity.getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        Log.d("KOORDINAT 1", latitude.toString() + longitude.toString())
         if (checkLocationPermission()) {
             fusedLocation = LocationServices.getFusedLocationProviderClient(activity)
             val location: Location? = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
-            Log.d("KOORDINAT 2", location?.latitude.toString() + location?.longitude.toString())
             if (location != null) {
                 latitude = location.latitude
                 longitude = location.longitude
-                Log.d("KOORDINAT 3", latitude.toString() + longitude.toString())
                 getRegionCode(latitude, longitude)
             }
         } else {
@@ -69,9 +66,7 @@ class LocationUtils(private val activity: FragmentActivity) {
             val address: List<Address> = geocoder.getFromLocation(-6.200229, 106.849211, 1)!!
             for (region in address) {
                 val city = region.adminArea
-                Log.d("City", city)
                 regionCode = convertCityIntoRegionCode(city)
-                Log.d("RegionCode", regionCode)
                 locationCallback?.onLocationReceived(regionCode)
             }
         } catch (e: IOException) {

@@ -93,7 +93,6 @@ class HomeActivity : AppCompatActivity(), OnMapReadyCallback {
                     val floods_location = data.tags.instanceRegionCode
                     val report_data = data.reportData.reportType
                     val flood_depth = data.reportData.flood_depth
-                    Log.d("TEST", floods_location + report_data + flood_depth.toString())
                     pushNotification(floods_location, report_data, flood_depth)
                 }
             }
@@ -159,9 +158,6 @@ class HomeActivity : AppCompatActivity(), OnMapReadyCallback {
     companion object {
         private const val TAG = "HomeActivity"
         private const val KEY_THEME = "theme_mode"
-        const val CHANNEL_ID = "Flood_Channel_ID"
-        const val CHANNEL_NAME = "Flood_Channel"
-        const val NOTIFICATION_ID = 1
     }
 
 }

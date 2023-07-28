@@ -14,27 +14,6 @@ class ReportsViewModel: ViewModel() {
     private val disasterReports = MutableLiveData<List<Geometry>?>()
     private val dataDisasters = MutableLiveData<List<DisasterReports>?>()
 
-/*
-    fun fetchDisastersReports(timePeriod: Number) {
-        ApiClient.instance.getDisasterReports(timePeriod).enqueue(object : Callback<DisasterResponse> {
-            override fun onResponse(
-                call: Call<DisasterResponse>,
-                response: Response<DisasterResponse>
-            ) {
-                if (response.isSuccessful) {
-                    val geometries = response.body()?.result?.objects?.output?.geometries
-                    disasterReports.postValue(geometries)
-                    dataDisasters.value = geometries?.map { it.disasterReports } ?:  emptyList()
-                }
-            }
-
-            override fun onFailure(call: Call<DisasterResponse>, t: Throwable) {
-                t.message?.let { Log.d("Fail Load!", it) }
-            }
-        })
-    }
-*/
-
     fun fetchDisastersBasendOnArea(regionCode: String, timePeriod: Number) {
         ApiClient.instance.getDisastersBasedOnArea(regionCode, timePeriod).enqueue(object : Callback<DisasterResponse> {
             override fun onResponse(
