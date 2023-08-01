@@ -2,4 +2,28 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="primary">#FF6C53</color>
+    <color name="background">#F7F7FA</color>
+    <color name="card_item_background">#FFFFFF</color>
+    <color name="card_search_background">#FFFFFF</color>
+    <color name="chip_color_background">#FFFFFF</color>
+    <color name="primary_text">#403E3E</color>
+    <color name="secondary_text">#878585</color>
+    <color name="third_text">@color/primary</color>
+    <color name="chip_text">#403E3E</color>
+    <color name="line_shape">#C1C1C1</color>
+    <color name="primary_icon_color">@color/primary</color>
+    <color name="secondary_icon_color">@color/white</color>
+    <color name="button_text_color">@color/white</color>
+    <color name="color_stroke_thumb">@color/primary</color>
+    <color name="colorOnSurface">@color/primary</color>
+    <color name="colorSecondary">#403E3E</color>
+    <color name="dropdown_icon_color">@color/primary</color>
+    <color name="indicator_progress_color">@color/primary</color>
+    <color name="track_progress_color">#878585</color>
+    <color name="bg_button_back">@color/primary</color>
+    <color name="bg_button_settings">#FAFAFA</color>
+    <color name="card_view_cuaca">#FAFAFA</color>
+    <color name="color_stroke_cardview_cuaca">#FAFAFA</color>
+    <color name="color_strok_cardview_item">#E1E1E1</color>
 </resources>

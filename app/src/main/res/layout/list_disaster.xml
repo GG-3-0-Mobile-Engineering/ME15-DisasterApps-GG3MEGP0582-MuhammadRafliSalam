@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:strokeColor="@color/color_strok_cardview_item"
+    app:cardBackgroundColor="@color/card_item_background"
+    app:cardCornerRadius="8dp"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    app:cardUseCompatPadding="true"
+    android:elevation="8dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="109dp"
+            android:layout_height="109dp"
+            android:layout_marginTop="12dp"
+            android:scaleType="centerCrop"
+            android:layout_marginBottom="12dp"
+            android:layout_marginStart="12dp"
+            android:src="@drawable/ic_launcher_background"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_bold"
+            android:textSize="14sp"
+            android:text="@string/h1_lorem_ipsum"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="8dp"
+            android:textColor="@color/primary_text"
+            app:layout_constraintTop_toTopOf="@id/image"
+            app:layout_constraintStart_toEndOf="@id/image"/>
+
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="240dp"
+            android:layout_height="61dp"
+            android:fontFamily="@font/poppins_medium"
+            android:maxLines="3"
+            android:text="@string/p_lorem_ipsum"
+            android:textColor="@color/primary_text"
+            android:textSize="11sp"
+            app:layout_constraintStart_toStartOf="@id/title"
+            app:layout_constraintTop_toBottomOf="@id/title" />
+
+        <TextView
+            android:id="@+id/source"
+            android:layout_width="189dp"
+            android:layout_height="wrap_content"
+            android:textSize="10sp"
+            android:textColor="@color/secondary_text"
+            android:text="@string/h1_lorem_ipsum"
+            app:layout_constraintTop_toBottomOf="@id/description"
+            app:layout_constraintStart_toStartOf="@id/description"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>

@@ -1,4 +1,18 @@
 <resources>
     <string name="app_name">DisasterTracker</string>
     <string name="title_activity_maps">MapsActivity</string>
+    <string name="textHeadingBottomSheet">Informasi Bencana Terkini</string>
+    <string name="h1_lorem_ipsum">Lorem Ipsum</string>
+    <string name="p_lorem_ipsum">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</string>
+    <string name="searching_hint">Cari Area Bencana</string>
+    <string name="text_btn_show_disaster">Lihat Informasi Bencana</string>
+    <string name="title_toolbar_settings">Settings</string>
+    <string name="chip_disaster1">Banjir</string>
+    <string name="chip_disaster2">Badai</string>
+    <string name="chip_disaster3">Gempa</string>
+    <string name="chip_disaster4">Kabut</string>
+    <string name="chip_disaster5">Kebakaran</string>
+    <string name="chip_disaster6">Gunung Berapi</string>
+    <string name="text_dark_mode">Dark Theme</string>
+    <string name="text_button_lihat_lebih_banyak"><u>Lihat Lebih Banyak</u></string>
 </resources>
