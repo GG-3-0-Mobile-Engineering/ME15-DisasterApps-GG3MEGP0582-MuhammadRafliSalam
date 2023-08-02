@@ -17,10 +17,14 @@ class DisasterRepositoryImpl @Inject constructor(
     private val apiServices: DisastersApi
     ) : DisastersRepository {
 
-    override suspend fun fetchDisasterReports(timePeriod: Number): Flow<Resource<List<DisasterReports>>> = flow {
+    override suspend fun fetchDisasterReports(
+        regionName: String?,
+        disaster: String?,
+        timePeriod: Number
+    ): Flow<Resource<List<DisasterReports>>> = flow {
         try {
             emit(Resource.Loading())
-            val apiResponse = apiServices.getDisasterReports(timePeriod)
+            val apiResponse = apiServices.getDisasterReports(regionName, disaster, timePeriod)
             if (apiResponse.isSuccessful) {
                 val disasterReportsResponse = apiResponse.body()
                 val disasterReportsList = getResponseApiToModelDomain(disasterReportsResponse)

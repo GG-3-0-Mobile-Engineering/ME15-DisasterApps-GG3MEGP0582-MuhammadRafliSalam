@@ -8,13 +8,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.raflisalam.disastertracker.databinding.ListDisasterBinding
 import com.raflisalam.disastertracker.domain.model.DisasterReports
 
-class DisasterAdapter : RecyclerView.Adapter<DisasterAdapter.DisasterViewHolder>() {
-
-    private var listDisasterReports: List<DisasterReports>? = null
-
-    fun setListDisasters(data: List<DisasterReports>) {
-        listDisasterReports = data
-    }
+class DisasterAdapter(private var listDisasterReports: List<DisasterReports>?) : RecyclerView.Adapter<DisasterAdapter.DisasterViewHolder>() {
 
     inner class DisasterViewHolder (val binding: ListDisasterBinding): RecyclerView.ViewHolder(binding.root)
 

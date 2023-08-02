@@ -9,6 +9,9 @@ interface DisastersApi {
 
     @GET("reports")
     suspend fun getDisasterReports(
+        @Query("admin") regionName: String? = null,
+        @Query("disaster") disaster: String? = null,
         @Query("timeperiod") time : Number = 604800
     ): Response<DisastersReportResponse>
+
 }

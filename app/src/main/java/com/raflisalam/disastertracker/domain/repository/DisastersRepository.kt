@@ -7,6 +7,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface DisastersRepository {
 
-    suspend fun fetchDisasterReports(timePeriod: Number): Flow<Resource<List<DisasterReports>>>
-
+    suspend fun fetchDisasterReports(regionName: String?, disaster: String?, timePeriod: Number): Flow<Resource<List<DisasterReports>>>
 }

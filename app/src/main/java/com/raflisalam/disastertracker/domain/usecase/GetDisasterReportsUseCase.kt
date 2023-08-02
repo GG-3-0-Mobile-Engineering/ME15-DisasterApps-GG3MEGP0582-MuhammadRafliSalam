@@ -5,5 +5,6 @@ import com.raflisalam.disastertracker.domain.model.DisasterReports
 import kotlinx.coroutines.flow.Flow
 
 interface GetDisasterReportsUseCase {
-    suspend operator fun invoke(): Flow<Resource<List<DisasterReports>>>
+    suspend operator fun invoke(regionName: String?, disaster: String?, timePeriod: Number): Flow<Resource<List<DisasterReports>>>
+
 }
