@@ -1,5 +1,6 @@
 package com.raflisalam.disastertracker.di
 
+import com.raflisalam.disastertracker.common.utils.NotificationUtils
 import com.raflisalam.disastertracker.domain.repository.DisastersRepository
 import com.raflisalam.disastertracker.domain.usecase.GetDisasterReportsUseCase
 import com.raflisalam.disastertracker.domain.usecase.GetDisasterReportsUseCaseImpl
@@ -14,8 +15,9 @@ object DomainModule {
 
     @Provides
     fun provideGetDisasterReportsUseCase(
-        repository: DisastersRepository
+        repository: DisastersRepository,
+        notificationUtils: NotificationUtils
     ): GetDisasterReportsUseCase {
-        return GetDisasterReportsUseCaseImpl(repository)
+        return GetDisasterReportsUseCaseImpl(repository, notificationUtils)
     }
 }

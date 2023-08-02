@@ -3,6 +3,7 @@ package com.raflisalam.disastertracker.common.helper
 import com.raflisalam.disastertracker.data.remote.dto.DisastersReportResponse
 import com.raflisalam.disastertracker.domain.model.Coordinates
 import com.raflisalam.disastertracker.domain.model.DisasterReports
+import com.raflisalam.disastertracker.domain.model.ReportData
 import com.raflisalam.disastertracker.domain.model.Tags
 
 
@@ -17,6 +18,7 @@ fun getResponseApiToModelDomain(response: DisastersReportResponse?): List<Disast
             createdAt = properties?.createdAt ?: "Unknown Date",
             imageUrl = properties?.imageUrl ?: DisasterPropertiesHelper.getDisasterImage(properties?.disasterType.toString()),
             disasterType = properties?.disasterType ?: "Unknown Disaster",
+            reportData = ReportData(properties?.reportData?.reportType ?: "flood", properties?.reportData?.flood_depth ?: 0),
             tags = Tags(properties?.tags?.regionCode.toString()),
             title = properties?.title ?: DisasterPropertiesHelper.getDisasterTitle(properties?.disasterType.toString()),
             description = properties?.description ?: DisasterPropertiesHelper.getDisasterDesc(properties?.disasterType.toString())

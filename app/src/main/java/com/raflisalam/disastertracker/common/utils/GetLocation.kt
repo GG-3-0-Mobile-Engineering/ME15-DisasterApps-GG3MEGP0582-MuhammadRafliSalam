@@ -23,7 +23,7 @@ class GetLocation (private val activity: FragmentActivity) {
     private var locationCallback: LocationCallback? = null
 
     interface LocationCallback {
-        fun onLocationReceived(regionCode: String)
+        fun onLocationReceived(cityName: String)
     }
 
     var latitude: Double = 0.0
@@ -63,9 +63,8 @@ class GetLocation (private val activity: FragmentActivity) {
         try {
             val address: List<Address> = geocoder.getFromLocation(-6.196701, 106.852072, 1)!!
             for (region in address) {
-                val cityName = region.adminArea.lowercase()
-                regionCode = Convert.regionNameToRegionCode(cityName)
-                locationCallback?.onLocationReceived(regionCode)
+                val cityName = region.subAdminArea
+                locationCallback?.onLocationReceived(cityName)
             }
         } catch (e: IOException) {
             e.printStackTrace()

@@ -34,4 +34,8 @@ class DisasterReportsViewModel @Inject constructor(
             }
         }
     }
+
+    fun pushNotificationFloodDepth(reportType: String, floodDepth: Int) {
+        getDisasterReportsUseCase.checkAndSendPushNotification(reportType, floodDepth)
+    }
 }

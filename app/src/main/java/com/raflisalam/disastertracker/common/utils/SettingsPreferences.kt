@@ -2,22 +2,24 @@ package com.raflisalam.disastertracker.common.utils
 
 import android.content.Context
 import android.content.SharedPreferences
+import androidx.appcompat.app.AppCompatDelegate
 import javax.inject.Inject
 import javax.inject.Singleton
 
-class SettingsPreferences {
+class SettingsPreferences @Inject constructor(){
 
-    fun setQueryRegionCode(sharedPref: SharedPreferences, regionCode: String) {
+    fun setThemeMode(sharedPref: SharedPreferences, themeMode: Int) {
         val editor = sharedPref.edit()
-        editor.putString(REGION_QUERY_KEY, regionCode)
+        editor.putInt(KEY_THEME, themeMode)
         editor.apply()
     }
 
-  /*  fun insertQueryRegionCode (sharedPref: SharedPreferences) {
-        val currentRegionCode = sharedPref.getString(REGION_QUERY_KEY, Context.MODE_PRIVATE )
+    fun applyTheme(sharedPref: SharedPreferences) {
+        val currentThemeMode = sharedPref.getInt(KEY_THEME, AppCompatDelegate.MODE_NIGHT_NO)
+        AppCompatDelegate.setDefaultNightMode(currentThemeMode)
     }
-*/
+
     companion object {
-        private const val REGION_QUERY_KEY = "region_code"
+        private const val KEY_THEME = "theme_mode"
     }
 }
