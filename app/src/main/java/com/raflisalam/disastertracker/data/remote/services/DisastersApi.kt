@@ -1,6 +1,6 @@
-package com.raflisalam.disastertracker.data.remote
+package com.raflisalam.disastertracker.data.remote.services
 
-import com.raflisalam.disastertracker.data.remote.dto.DisastersReportResponse
+import com.raflisalam.disastertracker.data.remote.model.DisastersReportResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query

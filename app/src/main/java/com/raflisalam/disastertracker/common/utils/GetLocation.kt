@@ -13,8 +13,10 @@ import androidx.fragment.app.FragmentActivity
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.raflisalam.disastertracker.common.helper.Convert
+import dagger.hilt.android.qualifiers.ApplicationContext
 import java.io.IOException
 import java.util.Locale
+import javax.inject.Inject
 
 class GetLocation (private val activity: FragmentActivity) {
     private lateinit var locationManager: LocationManager
@@ -83,4 +85,3 @@ class GetLocation (private val activity: FragmentActivity) {
                 ) == PackageManager.PERMISSION_GRANTED)
     }
 }
-

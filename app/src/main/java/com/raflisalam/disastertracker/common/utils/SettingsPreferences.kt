@@ -7,7 +7,6 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 class SettingsPreferences @Inject constructor(){
-
     fun setThemeMode(sharedPref: SharedPreferences, themeMode: Int) {
         val editor = sharedPref.edit()
         editor.putInt(KEY_THEME, themeMode)

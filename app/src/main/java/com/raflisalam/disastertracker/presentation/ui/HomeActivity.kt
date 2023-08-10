@@ -20,11 +20,13 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.raflisalam.disastertracker.R
+import com.raflisalam.disastertracker.common.Constant
 import com.raflisalam.disastertracker.common.Resource
 import com.raflisalam.disastertracker.common.utils.GetLocation
 import com.raflisalam.disastertracker.common.utils.showToast
 import com.raflisalam.disastertracker.databinding.ActivityHomeBinding
 import com.raflisalam.disastertracker.presentation.viewmodel.DisasterReportsViewModel
+import com.raflisalam.disastertracker.presentation.viewmodel.WeatherReportsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -35,9 +37,9 @@ class HomeActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var getLocation: GetLocation
     private lateinit var mapFragment: SupportMapFragment
     private val reportsViewModel: DisasterReportsViewModel by viewModels()
+    private val weatherViewModel: WeatherReportsViewModel by viewModels()
 
-    private var regionName: String? = null
-    private var disasterType: String? = null
+    private var defaultRegionName: String = "dki jakarta"
 
     private val requestPermissionLauncher =
         registerForActivityResult(
@@ -72,8 +74,39 @@ class HomeActivity : AppCompatActivity(), OnMapReadyCallback {
             override fun onLocationReceived(cityName: String) {
                 binding.textLocation.text = cityName
                 binding.icLocation.visibility = View.VISIBLE
+                fetchWeatherReports(cityName)
             }
         })
+    }
+
+    private fun fetchWeatherReports(cityName: String) {
+        weatherViewModel.fetchWeatherReports(Constant.WEATHER_API_KEY, "Makassar")
+        weatherViewModel.weatherReports.observe(this) {
+            when (it) {
+                is Resource.Error -> {
+                    showToast(it.message.toString())
+                }
+                is Resource.Loading -> {
+
+                }
+                is Resource.Success -> {
+                    val report = it.data
+                    Log.d("REPORT WEATHER", "Suhu ${report?.tempC}, Berawan ${report?.clouds}, Angin ${report?.wind}, Lembab ${report?.humidity}" )
+                    binding.apply {
+                        textValueSuhu.text = "${report?.tempC}°C"
+                        if (report?.tempC!! <= 19) {
+                            textCondition.text = "Dingin"
+                        } else {
+                            textCondition.text = "Panas"
+                        }
+                        textValueBerawan.text = "${report?.clouds}%"
+                        textValueAngin.text = "${report?.wind}mph"
+                        textValueLembab.text = "${report?.humidity}%"
+                    }
+                }
+                null -> showToast("Not Found")
+            }
+        }
     }
 
     private fun setupTheme() {
@@ -87,11 +120,15 @@ class HomeActivity : AppCompatActivity(), OnMapReadyCallback {
             btnSettings.setOnClickListener {
                 startActivity(Intent(this@HomeActivity, SettingsActivity::class.java))
             }
+
+            btnShowMore.setOnClickListener {
+                startActivity(Intent(this@HomeActivity, MapsActivity::class.java))
+            }
         }
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
-        reportsViewModel.fetchDisasterReports("dki jakarta", "flood", 604800)
+        reportsViewModel.fetchDisasterReports(defaultRegionName, "flood", 604800)
         reportsViewModel.disasterReports.observe(this) {
             when (it) {
                 is Resource.Error -> {
@@ -114,9 +151,7 @@ class HomeActivity : AppCompatActivity(), OnMapReadyCallback {
                         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(markers, 14f))
                         val reportType = report.reportData.reportType
                         val floodDepth = report.reportData.floodDepth
-                        if (reportType == "flood") {
-                            reportsViewModel.pushNotificationFloodDepth(reportType, floodDepth)
-                        }
+                        reportsViewModel.pushNotificationFloodDepth(reportType, floodDepth)
                     }
                 }
                 null -> "Data Not Found"

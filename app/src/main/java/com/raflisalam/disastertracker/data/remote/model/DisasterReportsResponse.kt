@@ -1,11 +1,11 @@
-package com.raflisalam.disastertracker.data.remote.dto
+package com.raflisalam.disastertracker.data.remote.model
 
 import com.google.gson.annotations.SerializedName
 import com.raflisalam.disastertracker.domain.model.DisasterReports
 
 data class DisastersReportResponse(
     @SerializedName("statusCode")
-    val statusCode: Int? = null,
+    val statusCode: Int,
     @SerializedName("result")
     val result: Result? = null
 )

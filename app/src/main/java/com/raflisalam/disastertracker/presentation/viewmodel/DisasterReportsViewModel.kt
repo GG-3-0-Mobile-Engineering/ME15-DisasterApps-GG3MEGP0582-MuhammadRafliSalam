@@ -6,9 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.raflisalam.disastertracker.common.Resource
 import com.raflisalam.disastertracker.domain.model.DisasterReports
-import com.raflisalam.disastertracker.domain.usecase.GetDisasterReportsUseCase
+import com.raflisalam.disastertracker.domain.usecase.disaster.GetDisasterReportsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

@@ -1,4 +1,4 @@
-package com.raflisalam.disastertracker.domain.usecase
+package com.raflisalam.disastertracker.domain.usecase.disaster
 
 import com.raflisalam.disastertracker.common.Resource
 import com.raflisalam.disastertracker.common.helper.Convert
@@ -21,7 +21,6 @@ class GetDisasterReportsUseCaseImpl @Inject constructor(
         val regionCode = regionName?.let { Convert.regionNameToRegionCode(it) }
         return repository.fetchDisasterReports(regionCode, disaster, timePeriod)
     }
-
     override fun checkAndSendPushNotification(reportType: String, floodDepth: Int) {
         notificationUtils.checkAndSendPushNotification(reportType, floodDepth)
     }

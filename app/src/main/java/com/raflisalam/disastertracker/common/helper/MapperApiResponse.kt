@@ -1,11 +1,22 @@
 package com.raflisalam.disastertracker.common.helper
 
-import com.raflisalam.disastertracker.data.remote.dto.DisastersReportResponse
+import com.raflisalam.disastertracker.data.remote.model.DisastersReportResponse
+import com.raflisalam.disastertracker.data.remote.model.WeatherReportsResponse
 import com.raflisalam.disastertracker.domain.model.Coordinates
 import com.raflisalam.disastertracker.domain.model.DisasterReports
 import com.raflisalam.disastertracker.domain.model.ReportData
 import com.raflisalam.disastertracker.domain.model.Tags
+import com.raflisalam.disastertracker.domain.model.WeatherReports
 
+fun getResponseWeatherApiToModel(response: WeatherReportsResponse?): WeatherReports {
+    val data = response?.current
+    return WeatherReports(
+        tempC = data?.tempC ?: 0,
+        clouds = data?.cloud ?: 0,
+        wind = data?.windMph ?: 0.0,
+        humidity = data?.humidity ?: 0
+    )
+}
 
 fun getResponseApiToModelDomain(response: DisastersReportResponse?): List<DisasterReports> {
     val disasterReportsList = mutableListOf<DisasterReports>()
@@ -29,4 +40,5 @@ fun getResponseApiToModelDomain(response: DisastersReportResponse?): List<Disast
 
     return disasterReportsList
 }
+
 

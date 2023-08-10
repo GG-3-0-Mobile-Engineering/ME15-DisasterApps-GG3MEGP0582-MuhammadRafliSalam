@@ -56,7 +56,6 @@ object Convert {
         }
     }
 
-/*
     fun adminAreaToRegionCode(cityName: String?): String {
         return when (cityName) {
             "Aceh" -> DisasterArea.ACEH.value.code
@@ -96,5 +95,4 @@ object Convert {
             else -> "invalid region code"
         }
     }
-*/
 }

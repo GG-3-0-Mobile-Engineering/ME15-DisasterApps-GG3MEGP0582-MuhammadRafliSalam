@@ -60,7 +60,13 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         reportsViewModel.disasterReports.observe(this) {
             when (it) {
                 is Resource.Error -> {
-                    binding.loadingProgress.visibility = View.GONE
+                    binding.apply {
+                        loadingProgress.visibility = View.GONE
+                        mapFragment.view?.visibility = View.VISIBLE
+                        materialCardView.visibility = View.VISIBLE
+                        disasterTypeFilter.visibility = View.VISIBLE
+                        btnShowDisasters.visibility = View.VISIBLE
+                    }
                     showToast(it.message.toString())
                 }
                 is Resource.Loading -> {
@@ -130,6 +136,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         binding.apply {
             btnShowDisasters.setOnClickListener {
                 bottomSheetDialog.show()
+            }
+
+            btnBack.setOnClickListener {
+                onBackPressed()
             }
         }
     }

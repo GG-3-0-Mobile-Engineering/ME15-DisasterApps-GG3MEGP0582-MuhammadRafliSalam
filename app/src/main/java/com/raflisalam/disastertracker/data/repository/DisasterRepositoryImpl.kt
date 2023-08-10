@@ -2,7 +2,7 @@ package com.raflisalam.disastertracker.data.repository
 
 import com.raflisalam.disastertracker.common.Resource
 import com.raflisalam.disastertracker.common.helper.getResponseApiToModelDomain
-import com.raflisalam.disastertracker.data.remote.DisastersApi
+import com.raflisalam.disastertracker.data.remote.services.DisastersApi
 import com.raflisalam.disastertracker.domain.model.DisasterReports
 import com.raflisalam.disastertracker.domain.repository.DisastersRepository
 import kotlinx.coroutines.flow.Flow

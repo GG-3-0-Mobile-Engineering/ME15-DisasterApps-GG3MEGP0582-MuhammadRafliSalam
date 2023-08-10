@@ -1,4 +1,4 @@
-package com.raflisalam.disastertracker.domain.usecase
+package com.raflisalam.disastertracker.domain.usecase.disaster
 
 import com.raflisalam.disastertracker.common.Resource
 import com.raflisalam.disastertracker.domain.model.DisasterReports
