@@ -9,10 +9,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -25,6 +27,9 @@ import com.raflisalam.disastertracker.common.Resource
 import com.raflisalam.disastertracker.common.utils.GetLocation
 import com.raflisalam.disastertracker.common.utils.showToast
 import com.raflisalam.disastertracker.databinding.ActivityHomeBinding
+import com.raflisalam.disastertracker.domain.model.DisasterReports
+import com.raflisalam.disastertracker.presentation.adapter.DisasterAdapter
+import com.raflisalam.disastertracker.presentation.adapter.DiscoverAdapter
 import com.raflisalam.disastertracker.presentation.viewmodel.DisasterReportsViewModel
 import com.raflisalam.disastertracker.presentation.viewmodel.WeatherReportsViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -36,6 +41,10 @@ class HomeActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var sharedPref: SharedPreferences
     private lateinit var getLocation: GetLocation
     private lateinit var mapFragment: SupportMapFragment
+    private lateinit var adapter: DiscoverAdapter
+
+
+
     private val reportsViewModel: DisasterReportsViewModel by viewModels()
     private val weatherViewModel: WeatherReportsViewModel by viewModels()
 
@@ -62,7 +71,38 @@ class HomeActivity : AppCompatActivity(), OnMapReadyCallback {
 
         setupButton()
         setupTheme()
+        setupMenu()
         requestPermissionAndGetLocation()
+        fetchDisasterReports()
+    }
+
+    private fun setupMenu() {
+        binding.apply {
+            val triggerPopup = filterPeriod
+            val popupMenu = PopupMenu(this@HomeActivity, triggerPopup)
+
+            popupMenu.menuInflater.inflate(R.menu.filter_period_menu, popupMenu.menu)
+            popupMenu.setOnMenuItemClickListener { periodItem ->
+                when (periodItem.itemId) {
+                    R.id.today_period -> {
+                        showToast("Today Period")
+                        true
+                    }
+                    R.id.three_days_period -> {
+                        showToast("Three days Period")
+                        true
+                    }
+                    R.id.one_weeks_period -> {
+                        showToast("One weeks Period")
+                        true
+                    }
+                    else -> false
+                }
+            }
+            triggerPopup.setOnClickListener {
+                popupMenu.show()
+            }
+        }
     }
 
     private fun requestPermissionAndGetLocation() {
@@ -73,10 +113,36 @@ class HomeActivity : AppCompatActivity(), OnMapReadyCallback {
         getLocation.requestLocationUpdates(object : GetLocation.LocationCallback {
             override fun onLocationReceived(cityName: String) {
                 binding.textLocation.text = cityName
-                binding.icLocation.visibility = View.VISIBLE
                 fetchWeatherReports(cityName)
             }
         })
+    }
+
+    private fun fetchDisasterReports() {
+        reportsViewModel.fetchDisasterReports(defaultRegionName, "", 604800)
+        reportsViewModel.disasterReports.observe(this) {
+            when (it) {
+                is Resource.Error -> {
+
+                }
+                is Resource.Loading -> {
+
+                }
+                is Resource.Success -> {
+                    val reports = it.data ?: emptyList()
+                    initRecyclerView(reports)
+                }
+                null -> showToast("Not Found")
+            }
+        }
+    }
+
+    private fun initRecyclerView(reports: List<DisasterReports>) {
+        adapter = DiscoverAdapter(reports)
+        binding.apply {
+            recyclerView.layoutManager = LinearLayoutManager(this@HomeActivity, LinearLayoutManager.HORIZONTAL, false)
+            recyclerView.adapter = DiscoverAdapter(reports)
+        }
     }
 
     private fun fetchWeatherReports(cityName: String) {

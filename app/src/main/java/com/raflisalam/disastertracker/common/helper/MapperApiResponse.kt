@@ -18,7 +18,7 @@ fun getResponseWeatherApiToModel(response: WeatherReportsResponse?): WeatherRepo
     )
 }
 
-fun getResponseApiToModelDomain(response: DisastersReportResponse?): List<DisasterReports> {
+fun getResponseDisasterToModel(response: DisastersReportResponse?): List<DisasterReports> {
     val disasterReportsList = mutableListOf<DisasterReports>()
 
     response?.result?.objects?.output?.geometries?.forEach { geometry ->
@@ -30,7 +30,7 @@ fun getResponseApiToModelDomain(response: DisastersReportResponse?): List<Disast
             imageUrl = properties?.imageUrl ?: DisasterPropertiesHelper.getDisasterImage(properties?.disasterType.toString()),
             disasterType = properties?.disasterType ?: "Unknown Disaster",
             reportData = ReportData(properties?.reportData?.reportType ?: "flood", properties?.reportData?.flood_depth ?: 0),
-            tags = Tags(properties?.tags?.regionCode.toString()),
+            tags = Tags(regionCode = properties?.tags?.instanceRegionCode.toString()),
             title = properties?.title ?: DisasterPropertiesHelper.getDisasterTitle(properties?.disasterType.toString()),
             description = properties?.description ?: DisasterPropertiesHelper.getDisasterDesc(properties?.disasterType.toString())
         )

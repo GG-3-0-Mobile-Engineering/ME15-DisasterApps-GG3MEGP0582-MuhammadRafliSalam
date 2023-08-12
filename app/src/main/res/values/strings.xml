@@ -13,6 +13,9 @@
     <string name="chip_disaster4">Kabut</string>
     <string name="chip_disaster5">Kebakaran</string>
     <string name="chip_disaster6">Gunung Berapi</string>
+    <string name="today_period">Hari Ini</string>
+    <string name="three_days_period">3 Hari Terakhir</string>
+    <string name="one_weeks_period">1 Minggu Terakhir</string>
     <string name="text_dark_mode">Dark Theme</string>
     <string name="text_button_lihat_lebih_banyak"><u>Lihat Lebih</u></string>
 </resources>

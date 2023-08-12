@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/today_period"
+        android:title="@string/today_period" />
+    <item android:id="@+id/three_days_period"
+        android:title="@string/three_days_period" />
+    <item android:id="@+id/one_weeks_period"
+        android:title="@string/one_weeks_period" />
+</menu>

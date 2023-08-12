@@ -33,12 +33,12 @@ data class Geometry(
     @SerializedName("type")
     val type: String? = null,
     @SerializedName("properties")
-    val properties: PropertiesDto? = null,
+    val properties: Properties? = null,
     @SerializedName("coordinates")
     val coordinates: List<Double>? = null
 )
 
-data class PropertiesDto(
+data class Properties(
     @SerializedName("pkey")
     val pkey: String? = null,
     @SerializedName("created_at")

@@ -19,6 +19,6 @@ class SettingsPreferences @Inject constructor(){
     }
 
     companion object {
-        private const val KEY_THEME = "theme_mode"
+        const val KEY_THEME = "theme_mode"
     }
 }

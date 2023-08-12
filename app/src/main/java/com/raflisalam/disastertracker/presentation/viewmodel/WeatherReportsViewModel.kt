@@ -28,7 +28,7 @@ class WeatherReportsViewModel @Inject constructor(
                     _weatherReports.value = it
                 }
             } catch (e: Exception) {
-                _weatherReports.value = Resource.Error("Failed to fetch disaster reports")
+                _weatherReports.value = Resource.Error("Failed to fetch weather reports")
             }
         }
     }

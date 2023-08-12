@@ -1,30 +1,22 @@
-package com.raflisalam.disastertracker
+package com.raflisalam.disastertracker.disaster.repository
 
 import com.raflisalam.disastertracker.common.Resource
-import com.raflisalam.disastertracker.common.helper.getResponseApiToModelDomain
+import com.raflisalam.disastertracker.common.helper.getResponseDisasterToModel
 import com.raflisalam.disastertracker.data.remote.model.DisastersReportResponse
 import com.raflisalam.disastertracker.data.remote.services.DisastersApi
 import com.raflisalam.disastertracker.data.repository.DisasterRepositoryImpl
-import com.raflisalam.disastertracker.domain.model.Coordinates
-import com.raflisalam.disastertracker.domain.model.DisasterReports
-import com.raflisalam.disastertracker.domain.model.ReportData
-import com.raflisalam.disastertracker.domain.model.Tags
 import com.raflisalam.disastertracker.domain.repository.DisastersRepository
 import io.mockk.coEvery
 import io.mockk.mockk
 import junit.framework.TestCase.assertEquals
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.runBlocking
 import okhttp3.ResponseBody.Companion.toResponseBody
 import okio.IOException
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
-import org.mockito.Mockito
 import org.mockito.Mockito.mock
 import org.mockito.Mockito.`when`
-import org.mockito.MockitoAnnotations
-import org.mockito.stubbing.OngoingStubbing
 import retrofit2.HttpException
 import retrofit2.Response
 
@@ -42,7 +34,7 @@ class DisasterRepositoryImplTest {
     }
 
     @Test
-    fun `when fetchDisasterReports is Success, Response Api should return Response Success`(): Unit = runBlocking {
+    fun `when getDisasterReports is Success, Response Api should return Response Success`(): Unit = runBlocking {
         val regionName = "RegionName"
         val disasterType = "Disaster"
         val timePeriod = 123
@@ -53,7 +45,7 @@ class DisasterRepositoryImplTest {
     }
 
     @Test
-    fun `when apiResponse is successful, repo should map apiResponse to model domain`() = runBlocking {
+    fun `when getDisasterReports is successful, repo should map apiResponse to model domain and return Resource Success`() = runBlocking {
         val regionName = "RegionName"
         val disasterType = "Disaster"
         val timePeriod = 123
@@ -62,7 +54,7 @@ class DisasterRepositoryImplTest {
         `when`(mockApiServices.getDisasterReports(regionName, disasterType, timePeriod)).thenReturn(
             Response.success(dummyApiResponse))
 
-        val mapApiResponse = getResponseApiToModelDomain(dummyApiResponse)
+        val mapApiResponse = getResponseDisasterToModel(dummyApiResponse)
         val flow = repo.fetchDisasterReports(regionName, disasterType, timePeriod)
 
         flow.collect { resource ->
@@ -73,7 +65,7 @@ class DisasterRepositoryImplTest {
     }
 
     @Test
-    fun `when fetchDisasterReports is Error, Response Api should return Resource Error`(): Unit = runBlocking {
+    fun `when getDisasterReports is Error, Response Api should return Resource Error`(): Unit = runBlocking {
         val regionName = "RegionName"
         val disaster = "Disaster"
         val timePeriod = 123
@@ -93,7 +85,7 @@ class DisasterRepositoryImplTest {
     }
 
     @Test
-    fun testFetchDisasterReports_HttpException() = runBlocking {
+    fun `when getDisasterReports encounters HttpException, it should return Resource Error`() = runBlocking {
         val regionName = "RegionName"
         val disaster = "Disaster"
         val timePeriod = 123
@@ -112,7 +104,7 @@ class DisasterRepositoryImplTest {
     }
 
     @Test
-    fun `when fetchDisasterReports encounters IOException, it should return Resource Error`() = runBlocking {
+    fun `when getDisasterReports encounters IOException, it should return Resource Error`() = runBlocking {
         val regionName = "RegionName"
         val disasterType = "Disaster"
         val timePeriod = 123

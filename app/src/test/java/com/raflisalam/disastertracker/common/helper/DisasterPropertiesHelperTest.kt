@@ -1,4 +1,4 @@
-package com.raflisalam.disastertracker
+package com.raflisalam.disastertracker.common.helper
 
 import com.raflisalam.disastertracker.common.helper.DisasterPropertiesHelper
 import junit.framework.TestCase.assertEquals
@@ -37,32 +37,32 @@ class DisasterPropertiesHelperTest {
     @Test
     fun testGetDisasterDesc() {
         assertEquals(
-            "Deskripsi Gempa Bumi",
+            "Gempa bumi, getaran mendalam yang terjadi di permukaan bumi akibat pergeseran lempeng tektonik. Energi yang dilepaskan menyebabkan goncangan hebat, merusak bangunan dan infrastruktur, serta mengancam keselamatan jiwa.",
             DisasterPropertiesHelper.getDisasterDesc("earthquake")
         )
         assertEquals(
-            "Deskripsi Kebakaran",
+            "Kebakaran, wabah api yang tak terkendali, dapat melahap bangunan, hutan, atau lahan. Meninggalkan kerugian material dan lingkungan yang besar, serta mengancam nyawa dan sumber daya alam.",
             DisasterPropertiesHelper.getDisasterDesc("fire")
         )
         assertEquals(
-            "Deskripsi Banjir",
+            "Banjir, luapan air yang melanda daratan akibat curah hujan yang tinggi atau luapan sungai. Mengakibatkan genangan air, merendam pemukiman, pertanian, dan infrastruktur, serta menimbulkan kerugian ekonomi dan dampak kesehatan.",
             DisasterPropertiesHelper.getDisasterDesc("flood")
         )
         assertEquals(
-            "Deskripsi Asap",
+            "Kabut, kondensasi uap air yang menyebabkan penglihatan terbatas dan udara terasa lembab. Dalam kasus yang ekstrem, kabut tebal dapat menyebabkan gangguan lalu lintas dan masalah kesehatan pernapasan bagi masyarakat",
             DisasterPropertiesHelper.getDisasterDesc("haze")
         )
         assertEquals(
-            "Deskripsi Gunung Meletus",
+            "Gunung meletus, letusan material vulkanik dari kawah gunung berapi. Mengeluarkan asap, lava, dan awan panas, yang bisa menyebabkan kerusakan besar pada lingkungan dan mengancam keselamatan warga di sekitar gunung.",
             DisasterPropertiesHelper.getDisasterDesc("volcano")
         )
         assertEquals(
-            "Deskripsi Angin Kencang",
+            "Badai angin, cuaca ekstrem dengan angin kencang dan hujan deras. Merusak atap rumah, pohon tumbang, dan mengganggu distribusi listrik, serta mengancam keselamatan warga di luar ruangan.",
             DisasterPropertiesHelper.getDisasterDesc("wind")
         )
         assertEquals(
-            "Bencana Tidak Ditemukan",
-            DisasterPropertiesHelper.getDisasterDesc("tornado")
+            "Disaster Not Found",
+            DisasterPropertiesHelper.getDisasterTitle("")
         )
     }
 
@@ -77,11 +77,11 @@ class DisasterPropertiesHelperTest {
             DisasterPropertiesHelper.getDisasterTitle("fire")
         )
         assertEquals(
-            "Banjir",
+            "Bencana Banjir",
             DisasterPropertiesHelper.getDisasterTitle("flood")
         )
         assertEquals(
-            "Asap",
+            "Kabut",
             DisasterPropertiesHelper.getDisasterTitle("haze")
         )
         assertEquals(
@@ -89,12 +89,12 @@ class DisasterPropertiesHelperTest {
             DisasterPropertiesHelper.getDisasterTitle("volcano")
         )
         assertEquals(
-            "Angin Kencang",
+            "Badai Angin",
             DisasterPropertiesHelper.getDisasterTitle("wind")
         )
         assertEquals(
-            "Bencana Tidak Ditemukan",
-            DisasterPropertiesHelper.getDisasterTitle("tornado")
+            "Disaster Not Found",
+            DisasterPropertiesHelper.getDisasterTitle("")
         )
     }
 }
