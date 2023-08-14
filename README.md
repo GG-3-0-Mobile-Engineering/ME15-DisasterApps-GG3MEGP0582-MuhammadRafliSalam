@@ -20,7 +20,7 @@ and volcanic eruptions, in Indonesia. This application serves as the culminating
 ## Installation & Configuration
 
 1. Clone repo
-    Clone this repo with `git clone https://github.com/username/repo.git` and open with Android studio
+    Clone this repo with `[git clone https://github.com/GG-3-0-Mobile-Engineering/ME15-DisasterApps-GG3MEGP0582-MuhammadRafliSalam.git` and open with Android studio
 2. API Key
    Add googleMaps and weatherMaps API key at gradle.properties with the following info :
     - maps_api_key="YOUR_KEY"
@@ -33,5 +33,5 @@ and volcanic eruptions, in Indonesia. This application serves as the culminating
 
 ## How to use the app & Demo Apk
 
-[Link video how to use the app](https://youtu.be/aZmFxzi5Qck)
+[Link video how to use the app](https://youtu.be/aZmFxzi5Qck) <br>
 [Demo Apk](https://drive.google.com/drive/folders/1Uzq-cdvsySQlvQDq29M33ZYDFU27ZjM2?usp=drive_link)
