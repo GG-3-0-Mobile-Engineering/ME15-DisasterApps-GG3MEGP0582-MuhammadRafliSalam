@@ -41,6 +41,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private var regionName: String? = null
     private var disasterType: String? = null
+    private var timePeriod: Number = 604800
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,7 +57,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     private fun fetchDisasterReports() {
-        reportsViewModel.fetchDisasterReports(regionName, disasterType, 604800)
+        reportsViewModel.fetchDisasterReports(regionName, disasterType, timePeriod)
         reportsViewModel.disasterReports.observe(this) {
             when (it) {
                 is Resource.Error -> {
@@ -103,7 +104,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 val chip: Chip? = group.findViewById(checkedId)
                 val selectedChipDisaster = Convert.chipValuesToEnglish(chip?.text.toString())
                 disasterType = selectedChipDisaster
-                reportsViewModel.fetchDisasterReports(regionName, disasterType, 604800)
+                reportsViewModel.fetchDisasterReports(regionName, disasterType, timePeriod)
             }
             return disasterType
         }
@@ -116,7 +117,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 override fun onQueryTextSubmit(query: String?): Boolean {
                     if (!query.isNullOrEmpty()) {
                         regionName = query.lowercase(Locale.getDefault())
-                        reportsViewModel.fetchDisasterReports(regionName, disasterType, 604800)
+                        reportsViewModel.fetchDisasterReports(regionName, disasterType, timePeriod)
                     }
                     searching.setQuery("", false)
                     searching.clearFocus()
@@ -175,7 +176,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                                 .title(data.title)
                                 .snippet("Bencana Terjadi Pada ${data.createdAt}")
                         )
-                        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(markers, 14f))
+                        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(markers, 10f))
                     }
                 }
                 else -> "Data Not Found"

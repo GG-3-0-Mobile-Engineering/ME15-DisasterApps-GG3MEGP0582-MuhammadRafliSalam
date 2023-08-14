@@ -6,8 +6,6 @@
     app:strokeColor="@color/color_strok_cardview_item"
     app:cardBackgroundColor="@color/card_item_background"
     app:cardCornerRadius="8dp"
-    android:layout_marginStart="16dp"
-    android:layout_marginEnd="16dp"
     app:cardUseCompatPadding="true"
     android:elevation="8dp">
 
@@ -24,7 +22,6 @@
             android:layout_marginEnd="10dp"
             android:src="@drawable/ic_launcher_background"
             android:scaleType="centerCrop"
-            android:visibility="gone"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
@@ -63,7 +60,6 @@
             app:layout_constraintStart_toEndOf="@id/ic_location"
             app:layout_constraintTop_toTopOf="@+id/ic_location"
             app:layout_constraintBottom_toBottomOf="@id/ic_location"/>
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

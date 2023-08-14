@@ -44,6 +44,46 @@ object Convert {
         }
     }
 
+    fun regionCodeToRegionName(regionCode: String): String {
+        return when (regionCode) {
+            "ID-AC" -> DisasterArea.ACEH.value.name
+            "ID-BA" -> DisasterArea.BALI.value.name
+            "ID-BB" -> DisasterArea.KEPULAUAN_BANGKA_BELITUNG.value.name
+            "ID-BT" -> DisasterArea.BANTEN.value.name
+            "ID-BE" -> DisasterArea.BENGKULU.value.name
+            "ID-JT" -> DisasterArea.JAWA_TENGAH.value.name
+            "ID-KT" -> DisasterArea.KALIMANTAN_TENGAH.value.name
+            "ID-ST" -> DisasterArea.SULAWESI_TENGAH.value.name
+            "ID-JI" -> DisasterArea.JAWA_TIMUR.value.name
+            "ID-KI" -> DisasterArea.KALIMANTAN_TIMUR.value.name
+            "ID-NT" -> DisasterArea.NUSA_TENGGARA_TIMUR.value.name
+            "ID-GO" -> DisasterArea.GORONTALO.value.name
+            "ID-JK" -> DisasterArea.DKI_JAKARTA.value.name
+            "ID-JA" -> DisasterArea.JAMBI.value.name
+            "ID-LA" -> DisasterArea.LAMPUNG.value.name
+            "ID-MA" -> DisasterArea.MALUKU.value.name
+            "ID-KU" -> DisasterArea.KALIMANTAN_UTARA.value.name
+            "ID-MU" -> DisasterArea.MALUKU_UTARA.value.name
+            "ID-SA" -> DisasterArea.SULAWESI_UTARA.value.name
+            "ID-SU" -> DisasterArea.SUMATERA_UTARA.value.name
+            "ID-PA" -> DisasterArea.PAPUA.value.name
+            "ID-RI" -> DisasterArea.RIAU.value.name
+            "ID-KR" -> DisasterArea.KEPULAUAN_RIAU.value.name
+            "ID-SG" -> DisasterArea.SULAWESI_TENGGARA.value.name
+            "ID-KS" -> DisasterArea.KALIMANTAN_SELATAN.value.name
+            "ID-SN" -> DisasterArea.SULAWESI_SELATAN.value.name
+            "ID-SS" -> DisasterArea.SUMATERA_SELATAN.value.name
+            "ID-YO" -> DisasterArea.DI_YOGYAKARTA.value.name
+            "ID-JB" -> DisasterArea.JAWA_BARAT.value.name
+            "ID-KB" -> DisasterArea.KALIMANTAN_BARAT.value.name
+            "ID-NB" -> DisasterArea.NUSA_TENGGARA_BARAT.value.name
+            "ID-PB" -> DisasterArea.PAPUA_BARAT.value.name
+            "ID-SR" -> DisasterArea.SULAWESI_BARAT.value.name
+            "ID-SB" -> DisasterArea.SUMATERA_BARAT.value.name
+            else -> "Lokasi tidak diketahui"
+        }
+    }
+
     fun chipValuesToEnglish(selectedChip: String) : String {
         return when (selectedChip) {
             "Banjir" -> "flood"
@@ -56,43 +96,4 @@ object Convert {
         }
     }
 
-    fun adminAreaToRegionCode(cityName: String?): String {
-        return when (cityName) {
-            "Aceh" -> DisasterArea.ACEH.value.code
-            "Bali" -> DisasterArea.BALI.value.code
-            "Kepulauan Bangka Belitung" -> DisasterArea.KEPULAUAN_BANGKA_BELITUNG.value.code
-            "Banten" -> DisasterArea.BANTEN.value.code
-            "Bengkulu" -> DisasterArea.BENGKULU.value.code
-            "Jawa Tengah" -> DisasterArea.JAWA_TENGAH.value.code
-            "Kalimantan Tengah" -> DisasterArea.KALIMANTAN_TENGAH.value.code
-            "Central Sulawesi" -> DisasterArea.SULAWESI_TENGAH.value.code
-            "Jawa Timur" -> DisasterArea.JAWA_TIMUR.value.code
-            "East Kalimantan" -> DisasterArea.KALIMANTAN_TIMUR.value.code
-            "East Nusa Tenggara" -> DisasterArea.NUSA_TENGGARA_TIMUR.value.code
-            "Gorontalo" -> DisasterArea.GORONTALO.value.code
-            "Daerah Khusus Ibukota Jakarta" -> DisasterArea.DKI_JAKARTA.value.code
-            "Jambi" -> DisasterArea.JAMBI.value.code
-            "Lampung" -> DisasterArea.LAMPUNG.value.code
-            "Maluku" -> DisasterArea.MALUKU.value.code
-            "North Kalimantan" -> DisasterArea.KALIMANTAN_UTARA.value.code
-            "North Maluku" -> DisasterArea.MALUKU_UTARA.value.code
-            "Sulawesi Utara" -> DisasterArea.SULAWESI_UTARA.value.code
-            "Sumatera Utara" -> DisasterArea.SUMATERA_UTARA.value.code
-            "Papua" -> DisasterArea.PAPUA.value.code
-            "Riau" -> DisasterArea.RIAU.value.code
-            "Kepulauan Riau" -> DisasterArea.KEPULAUAN_RIAU.value.code
-            "South East Sulawesi" -> DisasterArea.SULAWESI_TENGGARA.value.code
-            "South Kalimantan" -> DisasterArea.KALIMANTAN_SELATAN.value.code
-            "South Sulawesi" -> DisasterArea.SULAWESI_SELATAN.value.code
-            "South Sumatera" -> DisasterArea.SUMATERA_SELATAN.value.code
-            "Daerah Istimewa Yogyakarta" -> DisasterArea.DI_YOGYAKARTA.value.code
-            "Jawa Barat" -> DisasterArea.JAWA_BARAT.value.code
-            "Kalimantan Barat" -> DisasterArea.KALIMANTAN_BARAT.value.code
-            "West Nusa Tenggara" -> DisasterArea.NUSA_TENGGARA_BARAT.value.code
-            "West Papua" -> DisasterArea.PAPUA_BARAT.value.code
-            "West Sulawesi" -> DisasterArea.SULAWESI_BARAT.value.code
-            "Sumatera Barat" -> DisasterArea.SUMATERA_BARAT.value.code
-            else -> "invalid region code"
-        }
-    }
 }

@@ -26,6 +26,7 @@ import com.raflisalam.disastertracker.common.Constant
 import com.raflisalam.disastertracker.common.Resource
 import com.raflisalam.disastertracker.common.utils.GetLocation
 import com.raflisalam.disastertracker.common.utils.showToast
+import com.raflisalam.disastertracker.data.local.DisasterTimePeriod
 import com.raflisalam.disastertracker.databinding.ActivityHomeBinding
 import com.raflisalam.disastertracker.domain.model.DisasterReports
 import com.raflisalam.disastertracker.presentation.adapter.DisasterAdapter
@@ -43,12 +44,13 @@ class HomeActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var mapFragment: SupportMapFragment
     private lateinit var adapter: DiscoverAdapter
 
-
-
     private val reportsViewModel: DisasterReportsViewModel by viewModels()
     private val weatherViewModel: WeatherReportsViewModel by viewModels()
 
-    private var defaultRegionName: String = "dki jakarta"
+    private var regionCode: String? = null
+    private var disasterType: String? = null
+    private var defaultTimePeriod: Number = 604800
+    private var selectedTimePeriod: Number = 604800
 
     private val requestPermissionLauncher =
         registerForActivityResult(
@@ -76,7 +78,7 @@ class HomeActivity : AppCompatActivity(), OnMapReadyCallback {
         fetchDisasterReports()
     }
 
-    private fun setupMenu() {
+    private fun setupMenu(): Number {
         binding.apply {
             val triggerPopup = filterPeriod
             val popupMenu = PopupMenu(this@HomeActivity, triggerPopup)
@@ -85,15 +87,21 @@ class HomeActivity : AppCompatActivity(), OnMapReadyCallback {
             popupMenu.setOnMenuItemClickListener { periodItem ->
                 when (periodItem.itemId) {
                     R.id.today_period -> {
-                        showToast("Today Period")
+                        selectedTimePeriod = DisasterTimePeriod.TODAY.periodInSec
+                        reportsViewModel.fetchDisasterReports(regionCode, disasterType, selectedTimePeriod)
+                        showToast("Info bencana hari ini")
                         true
                     }
                     R.id.three_days_period -> {
-                        showToast("Three days Period")
+                        selectedTimePeriod = DisasterTimePeriod.THREE_DAYS.periodInSec
+                        reportsViewModel.fetchDisasterReports(regionCode, disasterType, selectedTimePeriod)
+                        showToast("Info bencana 3 hari terakhir")
                         true
                     }
                     R.id.one_weeks_period -> {
-                        showToast("One weeks Period")
+                        selectedTimePeriod = DisasterTimePeriod.ONE_WEEKS.periodInSec
+                        reportsViewModel.fetchDisasterReports(regionCode, disasterType, selectedTimePeriod)
+                        showToast("Info bencana 1 minggu terakhir")
                         true
                     }
                     else -> false
@@ -103,6 +111,7 @@ class HomeActivity : AppCompatActivity(), OnMapReadyCallback {
                 popupMenu.show()
             }
         }
+        return selectedTimePeriod
     }
 
     private fun requestPermissionAndGetLocation() {
@@ -119,7 +128,7 @@ class HomeActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     private fun fetchDisasterReports() {
-        reportsViewModel.fetchDisasterReports(defaultRegionName, "", 604800)
+        reportsViewModel.fetchDisasterReports(regionCode, disasterType, selectedTimePeriod)
         reportsViewModel.disasterReports.observe(this) {
             when (it) {
                 is Resource.Error -> {
@@ -146,7 +155,7 @@ class HomeActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     private fun fetchWeatherReports(cityName: String) {
-        weatherViewModel.fetchWeatherReports(Constant.WEATHER_API_KEY, "Makassar")
+        weatherViewModel.fetchWeatherReports(Constant.WEATHER_API_KEY, cityName)
         weatherViewModel.weatherReports.observe(this) {
             when (it) {
                 is Resource.Error -> {
@@ -157,7 +166,6 @@ class HomeActivity : AppCompatActivity(), OnMapReadyCallback {
                 }
                 is Resource.Success -> {
                     val report = it.data
-                    Log.d("REPORT WEATHER", "Suhu ${report?.tempC}, Berawan ${report?.clouds}, Angin ${report?.wind}, Lembab ${report?.humidity}" )
                     binding.apply {
                         textValueSuhu.text = "${report?.tempC}°C"
                         if (report?.tempC!! <= 19) {
@@ -194,7 +202,7 @@ class HomeActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
-        reportsViewModel.fetchDisasterReports(defaultRegionName, "flood", 604800)
+        reportsViewModel.fetchDisasterReports(regionCode, disasterType, defaultTimePeriod)
         reportsViewModel.disasterReports.observe(this) {
             when (it) {
                 is Resource.Error -> {

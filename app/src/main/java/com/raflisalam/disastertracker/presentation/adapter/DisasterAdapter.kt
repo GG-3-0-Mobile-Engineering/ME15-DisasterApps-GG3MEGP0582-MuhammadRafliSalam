@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.raflisalam.disastertracker.common.helper.DisasterPropertiesHelper
 import com.raflisalam.disastertracker.databinding.ListDisasterBinding
 import com.raflisalam.disastertracker.domain.model.DisasterReports
 
@@ -28,7 +29,7 @@ class DisasterAdapter(private var listDisasterReports: List<DisasterReports>?) :
                         .apply(RequestOptions())
                         .into(image)
                     title.text = data.title
-                    description.text = data.description
+                    description.text = data.description ?: DisasterPropertiesHelper.getDisasterDesc(data.disasterType)
                     source.text = "by ${data.createdAt}"
                 }
             }

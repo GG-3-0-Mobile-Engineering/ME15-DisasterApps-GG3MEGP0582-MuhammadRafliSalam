@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.raflisalam.disastertracker.common.helper.Convert
 import com.raflisalam.disastertracker.common.helper.DisasterPropertiesHelper
 import com.raflisalam.disastertracker.databinding.ListDisasterHomeBinding
 import com.raflisalam.disastertracker.domain.model.DisasterReports
@@ -27,13 +28,13 @@ class DiscoverAdapter (private var listDisasterReports: List<DisasterReports>?):
             val data = listDisasterReports?.get(position)
             if (data != null) {
                 binding.apply {
-                    val imageUrl = DisasterPropertiesHelper.getDisasterImage(data.disasterType)
+                    val imageUrl = data.imageUrl ?: DisasterPropertiesHelper.getDisasterImage(data.disasterType)
                     Glide.with(itemView.context)
                         .load(imageUrl)
                         .apply(RequestOptions())
                         .into(image)
                     title.text = data.title
-                    location.text = data.tags.regionCode
+                    location.text = Convert.regionCodeToRegionName(data.tags.regionCode)
                 }
             }
         }

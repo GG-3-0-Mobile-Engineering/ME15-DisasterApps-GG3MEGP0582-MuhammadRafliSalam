@@ -35,7 +35,7 @@ class MapperApiResponseTest {
         every { fakeProperties.disasterType } returns "flood"
         every { fakeProperties.reportData?.reportType } returns "flood on jakarta"
         every { fakeProperties.reportData?.flood_depth } returns 20
-        every { fakeProperties.tags?.regionCode } returns "ID-ID"
+        every { fakeProperties.tags?.instanceRegionCode } returns "ID-ID"
         every { fakeProperties.title } returns "Flood with a depth of 20 meters occurred in Jakarta"
         every { fakeProperties.description } returns "This flood occurred because Jakarta residents continued to build buildings instead of plants"
 
@@ -59,53 +59,6 @@ class MapperApiResponseTest {
         assertEquals("Flood with a depth of 20 meters occurred in Jakarta", actualResponse.title)
         assertEquals("This flood occurred because Jakarta residents continued to build buildings instead of plants", actualResponse.description)
     }
-
-    /*@Test
-    fun `when getResponseDisasterToModel is success get response but object imageUrl, title, and desc the data is null, should return default data from DisasterPropertiesHelper`() {
-        val fakeResponse = mockk<DisastersReportResponse>()
-        val fakeGeometries = mockk<Geometry>()
-        val fakeProperties = mockk<Properties>()
-        val fakeResult = mockk<Result>()
-        val fakeObjects = mockk<Objects>()
-        val fakeOutput = mockk<Output>()
-        val fakeParameter = "flood"
-        val expectedDefaultImageUrl = DisasterPropertiesHelper.getDisasterImage(fakeParameter)
-        val expectedDefaultTitle = DisasterPropertiesHelper.getDisasterTitle(fakeParameter)
-        val expectedDefaultDesc = DisasterPropertiesHelper.getDisasterDesc(fakeParameter)
-
-        every { fakeGeometries.properties } returns fakeProperties
-        every { fakeGeometries.coordinates } returns listOf(1.23, 4.56)
-        every { fakeProperties.createdAt } returns "2040-04-10T12:34:56"
-        every { fakeProperties.imageUrl } returns ""
-        every { fakeProperties.title } returns ""
-        every { fakeProperties.description } returns ""
-        every { fakeProperties.disasterType } returns "flood"
-        every { fakeProperties.reportData?.reportType } returns "flood on jakarta"
-        every { fakeProperties.reportData?.flood_depth } returns 20
-        every { fakeProperties.tags?.regionCode } returns "ID-ID"
-
-
-        every { fakeResponse.result } returns fakeResult
-        every { fakeResult.objects } returns fakeObjects
-        every { fakeObjects.output } returns fakeOutput
-        every { fakeOutput.geometries } returns listOf(fakeGeometries)
-
-        val response = getResponseDisasterToModel(fakeResponse)
-        assertEquals(1, response.size)
-        val actualResponse = response[0]
-
-        assertEquals(1.23, actualResponse.coordinates.latitude, 0.001)
-        assertEquals(4.56, actualResponse.coordinates.longitude, 0.001)
-        assertEquals("2040-04-10T12:34:56", actualResponse.createdAt)
-        assertEquals("flood", actualResponse.disasterType)
-        assertEquals("flood on jakarta", actualResponse.reportData.reportType)
-        assertEquals(20, actualResponse.reportData.floodDepth)
-        assertEquals("ID-ID", actualResponse.tags.regionCode)
-        assertEquals(expectedDefaultImageUrl, actualResponse.imageUrl)
-        assertEquals(expectedDefaultTitle, actualResponse.title)
-        assertEquals(expectedDefaultDesc, actualResponse.description)
-
-    }*/
 
     @Test
     fun `use getResponseDisasterToModel from MapperApiResponse Helper,when getResponseDisasterToModel get response is null, should return null`() {

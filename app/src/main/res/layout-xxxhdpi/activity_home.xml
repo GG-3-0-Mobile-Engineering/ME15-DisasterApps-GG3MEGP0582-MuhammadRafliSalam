@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/homeLayout"
+    tools:context=".presentation.ui.HomeActivity">
+
+    <ImageView
+        android:id="@+id/ic_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_location"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/text_location"
+        app:layout_constraintEnd_toStartOf="@+id/text_location"
+        app:layout_constraintTop_toTopOf="@+id/text_location" />
+
+    <TextView
+        android:id="@+id/text_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_bold"
+        android:textSize="14sp"
+        android:textColor="@color/primary_text"
+        android:layout_marginStart="16dp"
+        app:layout_constraintBottom_toBottomOf="@id/btnSettings"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/btnSettings" />
+
+    <ImageButton
+        android:id="@+id/btnSettings"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="@drawable/bg_settings"
+        android:src="@drawable/ic_settings"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/text_head_maps"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Laporan Bencana Terkini"
+        android:textColor="@color/primary_text"
+        android:textSize="16sp"
+        android:layout_marginTop="25dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_location" />
+
+    <Button
+        android:id="@+id/btnShowMore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_medium"
+        app:icon="@drawable/ic_arrow_forward"
+        app:iconGravity="end"
+        android:textSize="14sp"
+        android:textAllCaps="false"
+        android:textColor="@color/third_text"
+        app:iconPadding="5dp"
+        android:text="@string/text_button_lihat_lebih_banyak"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        app:layout_constraintTop_toTopOf="@id/text_head_maps"
+        app:layout_constraintBottom_toBottomOf="@id/text_head_maps"
+        app:layout_constraintEnd_toEndOf="@id/btnSettings"
+        />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_view_maps"
+        android:layout_width="0dp"
+        android:layout_height="190dp"
+        app:strokeColor="@color/color_strok_cardview_item"
+        app:cardCornerRadius="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:cardElevation="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/text_head_maps"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <fragment
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".ui.HomeActivity" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <TextView
+        android:id="@+id/text_head_cuaca"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cuaca Hari ini"
+        android:textSize="16sp"
+        android:textColor="@color/primary_text"
+        android:fontFamily="@font/poppins_bold"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintTop_toBottomOf="@+id/card_view_maps"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/text_paragraph_cuaca"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Selalu siap dengan kondisi cuaca hari ini"
+        android:textSize="12sp"
+        android:layout_marginTop="2dp"
+        android:textColor="@color/secondary_text"
+        android:fontFamily="@font/poppins_medium"
+        app:layout_constraintTop_toBottomOf="@+id/text_head_cuaca"
+        app:layout_constraintStart_toStartOf="@id/text_head_cuaca"/>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_view_suhu"
+        android:layout_width="85dp"
+        android:layout_height="110dp"
+        android:layout_marginTop="11dp"
+        app:cardElevation="4dp"
+        app:strokeColor="@color/color_stroke_cardview_cuaca"
+        app:cardCornerRadius="5dp"
+        app:cardBackgroundColor="@color/card_view_cuaca"
+        app:layout_constraintTop_toBottomOf="@id/text_paragraph_cuaca"
+        app:layout_constraintStart_toStartOf="@id/text_paragraph_cuaca">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/ic_suhu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginStart="15dp"
+                android:src="@drawable/ic_suhu"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                android:id="@+id/text_value_suhu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_semibold"
+                android:textColor="@color/primary_text"
+                android:textSize="14sp"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="15dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ic_suhu" />
+
+            <TextView
+                android:id="@+id/text_condition"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text=""
+                android:textColor="@color/third_text"
+                android:textSize="12sp"
+                android:layout_marginTop="3dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_value_suhu" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_view_cuaca"
+        android:layout_width="85dp"
+        android:layout_height="110dp"
+        android:layout_marginTop="11dp"
+        app:strokeColor="@color/color_stroke_cardview_cuaca"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="4dp"
+        android:layout_marginStart="13dp"
+        app:cardBackgroundColor="@color/card_view_cuaca"
+        app:layout_constraintTop_toBottomOf="@id/text_paragraph_cuaca"
+        app:layout_constraintStart_toEndOf="@id/card_view_suhu">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/ic_cuaca"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="13dp"
+                android:layout_marginStart="12dp"
+                android:src="@drawable/ic_berawan"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                android:id="@+id/text_value_berawan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="9dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:textColor="@color/primary_text"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ic_cuaca" />
+
+            <TextView
+                android:id="@+id/text_berawan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="Berawan"
+                android:textColor="@color/third_text"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_value_berawan" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_view_angin"
+        android:layout_width="85dp"
+        android:layout_height="110dp"
+        android:layout_marginTop="11dp"
+        app:strokeColor="@color/color_stroke_cardview_cuaca"
+        app:cardCornerRadius="5dp"
+        android:layout_marginEnd="13dp"
+        app:cardElevation="4dp"
+        app:cardBackgroundColor="@color/card_view_cuaca"
+        app:layout_constraintTop_toBottomOf="@id/text_paragraph_cuaca"
+        app:layout_constraintEnd_toStartOf="@id/card_view_lembab">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/ic_angin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="13dp"
+                android:layout_marginStart="12dp"
+                android:src="@drawable/ic_angin"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                android:id="@+id/text_value_angin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_semibold"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/primary_text"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="@+id/ic_angin"
+                app:layout_constraintTop_toBottomOf="@+id/ic_angin" />
+
+            <TextView
+                android:id="@+id/text_angin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_semibold"
+                android:layout_marginTop="6dp"
+                android:text="Angin"
+                android:textColor="@color/third_text"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="@+id/text_value_angin"
+                app:layout_constraintTop_toBottomOf="@+id/text_value_angin" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_view_lembab"
+        android:layout_width="85dp"
+        android:layout_height="110dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="11dp"
+        app:cardBackgroundColor="@color/card_view_cuaca"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_paragraph_cuaca"
+        app:strokeColor="@color/color_stroke_cardview_cuaca">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/ic_lembab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="13dp"
+                android:src="@drawable/ic_lembab"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/text_value_lembab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_semibold"
+                android:layout_marginTop="6dp"
+                android:textColor="@color/primary_text"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="@+id/ic_lembab"
+                app:layout_constraintTop_toBottomOf="@+id/ic_lembab" />
+
+            <TextView
+                android:id="@+id/text_lembab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="Lembab"
+                android:layout_marginTop="6dp"
+                android:textColor="@color/third_text"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="@+id/text_value_lembab"
+                app:layout_constraintTop_toBottomOf="@+id/text_value_lembab" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <TextView
+        android:id="@+id/text_head_discover"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Discover"
+        android:textSize="16sp"
+        android:textColor="@color/primary_text"
+        android:fontFamily="@font/poppins_bold"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintTop_toBottomOf="@+id/card_view_suhu"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/text_paragraph_discover"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Update informasi terkini bencana di seluruh Indonesia"
+        android:textSize="12sp"
+        android:layout_marginTop="2dp"
+        android:textColor="@color/secondary_text"
+        android:fontFamily="@font/poppins_medium"
+        app:layout_constraintTop_toBottomOf="@+id/text_head_discover"
+        app:layout_constraintStart_toStartOf="@id/text_head_discover"/>
+
+    <ImageView
+        android:id="@+id/filter_period"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_filter_list_xxxhdpi"
+        android:layout_marginEnd="15dp"
+        app:layout_constraintTop_toTopOf="@id/text_head_discover"
+        app:layout_constraintBottom_toBottomOf="@id/text_paragraph_discover"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="15dp"
+        app:layout_constraintTop_toBottomOf="@+id/text_paragraph_discover"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:listitem="@layout/list_disaster_home"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

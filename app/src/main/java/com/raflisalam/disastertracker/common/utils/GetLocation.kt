@@ -30,7 +30,6 @@ class GetLocation (private val activity: FragmentActivity) {
 
     var latitude: Double = 0.0
     var longitude: Double = 0.0
-    var regionCode: String = ""
 
     companion object {
         const val LOCATION_PERMISSION_REQUEST_CODE = 1001
@@ -63,10 +62,12 @@ class GetLocation (private val activity: FragmentActivity) {
     private fun getRegionCode(latitude: Double, longitude: Double) {
         val geocoder = Geocoder(activity, Locale.getDefault())
         try {
-            val address: List<Address> = geocoder.getFromLocation(-6.196701, 106.852072, 1)!!
-            for (region in address) {
-                val cityName = region.subAdminArea
-                locationCallback?.onLocationReceived(cityName)
+            val address: List<Address>? = geocoder.getFromLocation(-6.216370, 106.854500, 2)
+            if (address != null) {
+                for (region in address) {
+                    val cityName = region.subAdminArea
+                    locationCallback?.onLocationReceived(cityName)
+                }
             }
         } catch (e: IOException) {
             e.printStackTrace()
