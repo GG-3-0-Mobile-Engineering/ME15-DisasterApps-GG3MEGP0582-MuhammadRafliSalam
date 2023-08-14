@@ -1,13 +1,13 @@
 # ME15-DisasterApps-GG3MEGP0582-MuhammadRafliSalam
 
-[The "disaster-tracker" is an application designed to track natural disasters, such as floods, earthquakes, fires, 
-and volcanic eruptions, in Indonesia. This application serves as the culminating project of Generation Gigih 3.0's mobile engineering program.]
+The "disaster-tracker" is an application designed to track natural disasters, such as floods, earthquakes, fires, 
+and volcanic eruptions, in Indonesia. This application serves as the culminating project of Generation Gigih 3.0's mobile engineering program.
 
 ## List of contents
 
 - [Feature](#feature)
-- [Installation and Configuration](#installation&configuration)
-- [Penggunaan](#penggunaan)
+- [Installation&Configuration](#installation&configuration)
+- [Usage](#Usage)
 
 ## Feature
 
@@ -19,9 +19,15 @@ and volcanic eruptions, in Indonesia. This application serves as the culminating
 
 ## Installation and Configuration
 
-1. [Langkah-langkah instalasi yang diperlukan. Contohnya: "Clone repositori ini: `git clone https://github.com/username/repo.git`"]
-2. [Langkah-langkah lain yang perlu dilakukan, seperti instalasi dependensi atau konfigurasi.]
+1. Clone repo
+    Clone this repo with `git clone https://github.com/username/repo.git`
+2. Api Key
+   Add googleMaps and weatherMaps api key at <div style="background-color: #878585; padding: 10px;">
+    gradle.properties
+</div> with this following info :
+    - maps_api_key="YOUR_KEY"
+    - weather_api_key="YOUR_KEY"
 
-## Penggunaan
+## How to use the app
 
-[Tunjukkan bagaimana cara menggunakan proyek Anda. Berikan contoh perintah, kode, atau tangkapan layar.]
+`https://youtu.be/aZmFxzi5Qck`
