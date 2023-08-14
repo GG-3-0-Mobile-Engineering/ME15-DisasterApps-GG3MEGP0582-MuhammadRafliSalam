@@ -6,8 +6,8 @@ and volcanic eruptions, in Indonesia. This application serves as the culminating
 ## List of contents
 
 - [Feature](#feature)
-- [Installation and Configuration](#installation and configuration)
-- [How to use the app](#How to use the app)
+- [Installation & Configuration](#installation-&-configuration)
+- [How to use the app & Demo Apk](#How-to-use-the-app-&-Demo-Apk)
 
 ## Feature
 
@@ -25,7 +25,7 @@ and volcanic eruptions, in Indonesia. This application serves as the culminating
    Add googleMaps and weatherMaps API key at gradle.properties with the following info :
     - maps_api_key="YOUR_KEY"
     - weather_api_key="YOUR_KEY"
-3. API URL
+3. API URL :
    The API URL is in package common and class constant
 4. API Source
    - for the source of disaster API is https://docs.petabencana.id/
@@ -34,4 +34,4 @@ and volcanic eruptions, in Indonesia. This application serves as the culminating
 ## How to use the app & Demo Apk
 
 [Link video how to use the app](https://youtu.be/aZmFxzi5Qck)
-[Demo Apk]([https://youtu.be/aZmFxzi5Qck](https://drive.google.com/drive/folders/1Uzq-cdvsySQlvQDq29M33ZYDFU27ZjM2?usp=drive_link)https://drive.google.com/drive/folders/1Uzq-cdvsySQlvQDq29M33ZYDFU27ZjM2?usp=drive_link)
+[Demo Apk](https://drive.google.com/drive/folders/1Uzq-cdvsySQlvQDq29M33ZYDFU27ZjM2?usp=drive_link)
